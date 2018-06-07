@@ -1,8 +1,16 @@
 # ELAB18N7 Collezione di Dischi
 
-Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli **artisti**: nome, cognome, data di nascita, nome d'arte. Ogni artista può aver inciso più **album**, ed un album può essere stato inciso da più artisti. Di ogni album si vuole sapere il titolo, l'anno di pubblicazione ed il genere (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se il supporto dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. Ogni album viene pubblicato da una sola **etichetta**.
-Un'etichetta può pubblicare più album. Di ogni etichetta si deve indicare il nome, l'indirizzo e il numero di telefono.
-L'istituto organizza su richiesta, sedute di audizione di un album da parte degli interessati (**docenti** o **studenti**) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna. Per ogni **audizione** si conserva un numero progressivo di identificazione, data ed ora dell'audizione. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un commento generale (1000 caratteri), il livello di gradimento (alto, normale, basso).
+Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
+<font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, <u>l'indirizzo</u> e il numero di telefono</font>.
+L'istituto organizza su richiesta, sedute di audizione di un album da parte degli <font color="red"><u>interessati</u></font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
+
+**Legenda**
+
+- <font color="red">Entità</font>
+- <font color="red"><u>Entità composta</u></font>
+- <font color="blue">Associazioni</font>
+- <font color="green">Attributi</font>
+- <font color="green"><u>Attributi composti</u></font>
 
 ---
 
