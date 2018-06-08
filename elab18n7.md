@@ -255,6 +255,66 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
 
+### Traduzione di entità
+
+#### Artista
+
+L'entità `Artista` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
+$$
+\text{artisti} \equiv \{\underline{nome d'aerte} \text{, nome, cognome, data di nascita}\}
+$$
+
+#### Album
+
+L'entità `Album` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, gli stessi attributi e come chiave primaria gli identificatori dell'entità.
+$$
+\text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere}\}
+$$
+
+#### Etichetta
+
+L'entità `Etichetta` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
+$$
+\text{etichette} \equiv \{\underline{nome} \text{, telefono, via, numero civico, cap}\}
+$$
+
+#### Audizione
+
+L'entità `Audizione` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
+$$
+\text{audizioni} \equiv \{\underline{id} \text{, data, ora}\}
+$$
+
+### Traduzione delle associazioni
+
+#### Incisione
+
+L'associazione `Incisione` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione e come lista di attributi quella costituita dai sui stessi attributi, ma con l'aggiunta degli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna.
+Inoltre gli identificatori esterni faranno anche da chiave primaria della relazione.
+$$
+\text{incisioni} \equiv \{\underline{artista} \text{, } \underline{titolo} \text{, } \underline{anno}\}
+$$
+dove:
+- `artista` presenta un vincolo di referenza esterna a `nome d'arte` nella relazione `artisti`
+- `titolo` presenta un vincolo di referenza esterna a `titolo` nella relazione `album`
+- `anno` presenta un vincolo di referenza esterna a `anno` nella relazione `album`
+
+#### Pubblicazione
+
+L'associazione `Publicazione` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento della relazione nell'entità dal alto uno.
+Visto che l'associazione non presenta attributi propri, alla relazione `album` vene aggiunto solo il campo `etichetta` con vincolo di referenza esterna a `nome` nella relazione `etichette`.
+$$
+\text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere, etichetta}\}
+$$
+
+#### Ascolto
+
+L'associazione `Ascolto` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento della relazione nell'entità dal alto uno.
+Visto che l'associazione non presenta attributi propri, alla relazione `audizione` vene aggiunto solo i campi `titolo` con vincolo di referenza esterna a `nome` nella relazione `album` e `anno` con vincolo di referenza esterna a `anno` della relazione `album`.
+$$
+\text{audizioni} \equiv \{\underline{id} \text{, data, ora, titolo, anno}\}
+$$
+
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
