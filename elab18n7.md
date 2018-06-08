@@ -13,12 +13,13 @@ L'istituto organizza su richiesta, sedute di audizione di un album da parte degl
 - <font color="green"><u>Attributi composti</u></font>
 
 ---
+## Progettazione concettuale
 
-## Identificazione delle entità e delle associazioni
+### Identificazione delle entità e delle associazioni
 
-### Entità 
+#### Entità 
 
-#### Artista
+##### Artista
 
 > informazioni relative agli **artisti**: nome, cognome, data di nascita, nome d'arte
 
@@ -26,7 +27,7 @@ L'entità `Artista` è composta da quattro attributi. Il `nome` e il `cognome` d
 
 ![artista][]
 
-#### Album 
+##### Album 
 
 > Di ogni **album** si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere se il supporto dove il disco è memorizzato
 
@@ -36,7 +37,7 @@ Tutti i campi sono obbligatori.
 
 ![album][]
 
-#### Etichetta
+##### Etichetta
 
 > Di ogni **etichetta** si deve indicare il nome, l'indirizzo e il numero di telefono
 
@@ -45,7 +46,7 @@ Tutti i campi sono obbligatori.
 
 ![etichetta][]
 
-#### Docente e studente
+##### Docente e studente
 
 > (**docenti** o **studenti**) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
 
@@ -57,7 +58,7 @@ Tutti i campi sono obbligatori.
 
 ![universitario][]
 
-#### Audizione
+##### Audizione
 
 > Per ogni **audizione** si conserva un numero progressivo di identificazione, data ed ora dell'audizione
 
@@ -66,9 +67,9 @@ Tutti i campi sono obbligatori.
 
 ![audizione][]
 
-### Associazioni
+#### Associazioni
 
-#### Incisione
+##### Incisione
 
 > Ogni artista può aver **inciso** più album, ed un album può essere stato **inciso** da più artisti
 
@@ -79,7 +80,7 @@ Quest'associazione non ha attributi propri.
 
 ![incisione][]
 
-#### Pubblicazione
+##### Pubblicazione
 
 > Ogni album viene **pubblicato** da una sola etichetta
 
@@ -90,7 +91,7 @@ Quest'associazione non ha attributi propri.
 
 ![pubblicazione][]
 
-#### Partecipazione
+##### Partecipazione
 
 > L'istituto organizza su richiesta, sedute di audizione di un album da parte degli interessati
 
@@ -101,7 +102,7 @@ Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione comp
 
 ![partecipazione][]
 
-#### Ascolto
+##### Ascolto
 
 > L'istituto organizza su richiesta, sedute di audizione di un album
 
@@ -114,11 +115,11 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-## Tabelle per la documentazione
+### Tabelle per la documentazione
 
-### Tabella delle entità
+#### Tabella delle entità
 
-#### Artista
+##### Artista
 
 | Nome attributo  | Descrizione                                                | Tipo                                    |  ID  |
 | --------------- | ---------------------------------------------------------- | --------------------------------------- | :--: |
@@ -127,7 +128,7 @@ Quest'associazione non ha attributi propri.
 | cognome         | Il cognome dell'artista                                    | stringa<br />variabile<br />max 20 char |  no  |
 | data di nascita | Giorno, mese e anno in cui è nato l'artista                | data                                    |  no  |
 
-#### Album
+##### Album
 
 | Nome attributo | Descrizione                                       | Tipo                                    | ID   |
 | -------------- | ------------------------------------------------- | --------------------------------------- | ---- |
@@ -138,7 +139,7 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-#### Etichetta
+##### Etichetta
 
 | Nome attributo | Descrizione                                                  | Tipo                                    | ID   |
 | -------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -146,7 +147,7 @@ Quest'associazione non ha attributi propri.
 | indirizzo      | L'indirizzo della sede dell'etichetta. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
 | telefono       | Il numero, o i numeri di telefono appartenenti all'etichetta. L'etichetta deve possedere almeno un numero | intero                                  | no   |
 
-#### Docente
+##### Docente
 
 | Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
 | ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -159,7 +160,7 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-#### Studente
+##### Studente
 
 | Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
 | ------------------ | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -170,7 +171,7 @@ Quest'associazione non ha attributi propri.
 | anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
 | corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
 
-#### Audizione
+##### Audizione
 
 | Nome attributo  | Descrizione                                               | Tipo    | ID   |
 | --------------- | --------------------------------------------------------- | ------- | ---- |
@@ -178,9 +179,9 @@ Quest'associazione non ha attributi propri.
 | data            | Giorno, mese, anno in cui si svolge l'audizione           | data    | no   |
 | ora             | Ora in cui si svolge l'audizione                          | ora     | no   |
 
-### Tabelle delle associazioni
+#### Tabelle delle associazioni
 
-#### Incisione
+##### Incisione
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
@@ -189,14 +190,14 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-#### Pubblicazione
+##### Pubblicazione
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
 | Album            | 1,1                     |
 | Etichetta        | 0,n                     |
 
-#### Partecipazione
+##### Partecipazione
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
@@ -208,7 +209,7 @@ Quest'associazione non ha attributi propri.
 | commento       | Giudizio esteso sull'audizione    | stringa<br />variabile<br />max 1000 char | no   |
 | gradimento     | Giudizio sintetico sull'audizione | enumerabile                               | no   |
 
-#### Ascolto
+##### Ascolto
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
@@ -217,7 +218,7 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-### Vincoli e derivazioni
+#### Vincoli e derivazioni
 
 | Nome regola     | Descrizione regola                                                                                   |
 | --------------- | ---------------------------------------------------------                                            |
@@ -231,11 +232,28 @@ Quest'associazione non ha attributi propri.
 | RV8             | `Partecipazione.gradimento` può assumere uno dei seguenti valori: basso, normale, alto.              |
 | RV9             | `Partecipazione.commento` può essere al massimo lungo 1000 caratteri.                                |
 
-## Modello E-R
+### Modello E-R
 
 ![er][]
 
+## Progettazione logica
 
+### Trasformazioni preliminari
+
+#### Trasformazioni di attributi composti in attributi semplici
+
+L'entità `Etichetta` e l'entità `Unversitario` presentano tra i loro attributi l'attributo complesso `indirizzo` per poter passare dalla progettazione concettuale a quella logica dobbiamo eliminare questo attributo composto; per fare ciò si è scelto di scogliere l'attributo complesso in più attributi semplici.
+Per cui l'entità `Etichetta` sarà così trasformata:
+
+![etichetta-bis][]
+
+Allo stesso modo l'entità `Universitario` diventa:
+
+![universitario-bis][]
+
+#### Trasformazione degli attributi multivalore
+
+L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
 
 [studente]: img/Studente.png
 [album]: img/Album.png
@@ -248,3 +266,5 @@ Quest'associazione non ha attributi propri.
 [partecipazione]: img/Partecipazione.png
 [ascolto]: img/Ascolto.png
 [er]: img/ER.png
+[etichetta-bis]: img/Etichetta-bis.png
+[universitario-bis]: img/Universitario-bis.png
