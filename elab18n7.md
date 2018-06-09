@@ -255,13 +255,21 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
 
+#### Trasformazione della generalizzazione
+
+Durante la progettazione concettuale le entità `Studente` e `Docente` sono state generalizzate nell'entità `Universitario`, ma per poter passare alla progettazione logica incontriamo la necessita di eliminare la generalizzazione.
+Visto che ci troviamo difronte ad una generalizzazione totale ed esclusiva possiamo scegliere tra tre opzioni; trasformare la generalizzazione in un'associazione, far assorbire il padre nei figli e assorbire i figli nel padre. In questo caso abbiamo scelto di seguire quest'ultima opzione.
+I due figli(studente e docente) vengono eliminati, e i loro attributi aggiunti a quelli dell'entità padre. Questi nuovi attributi possono assumere il valore $NULL$. Inoltre all'entità `Universitario` viene aggiunto anche l'attributo `tipo`. Trovandoci in una generalizzazione totale ed esclusiva l'attributo `tipo` può assumere solo il valore docente e studente.
+
+![universitario-tris][]
+
 ### Traduzione di entità
 
 #### Artista
 
 L'entità `Artista` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
 $$
-\text{artisti} \equiv \{\underline{nome d'aerte} \text{, nome, cognome, data di nascita}\}
+\text{artisti} \equiv \{\underline{\text{nome_arte}} \text{, nome, cognome, data di nascita}\}
 $$
 
 #### Album
@@ -275,7 +283,7 @@ $$
 
 L'entità `Etichetta` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
 $$
-\text{etichette} \equiv \{\underline{nome} \text{, telefono, via, numero civico, cap}\}
+\text{etichette} \equiv \{\underline{nome} \text{, telefono, via, numero_civico, cap}\}
 $$
 
 #### Audizione
@@ -285,11 +293,19 @@ $$
 \text{audizioni} \equiv \{\underline{id} \text{, data, ora}\}
 $$
 
+#### Universitario
+
+L'entità `Universitario` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
+$$
+\text{universitari} \equiv \{\underline{matricola} \text{, nome, cognome, via, numero_civico, cap, tipo, area_disciplinare, email, corso, anno_iscrizione}\}
+$$
+
+
 ### Traduzione delle associazioni
 
 #### Incisione
 
-L'associazione `Incisione` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione e come lista di attributi quella costituita dai sui stessi attributi, ma con l'aggiunta degli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna.
+L'associazione `Incisione` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione. Non avendo attributi propri la lista degli attributi sarà costituita solo dagli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna.
 Inoltre gli identificatori esterni faranno anche da chiave primaria della relazione.
 $$
 \text{incisioni} \equiv \{\underline{artista} \text{, } \underline{titolo} \text{, } \underline{anno}\}
@@ -310,7 +326,7 @@ $$
 #### Ascolto
 
 L'associazione `Ascolto` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento della relazione nell'entità dal alto uno.
-Visto che l'associazione non presenta attributi propri, alla relazione `audizione` vene aggiunto solo i campi `titolo` con vincolo di referenza esterna a `nome` nella relazione `album` e `anno` con vincolo di referenza esterna a `anno` della relazione `album`.
+Visto che l'associazione non presenta attributi propri, alla relazione `audizione` vengono aggiunti solo i campi `titolo` con vincolo di referenza esterna a `nome` nella relazione `album` e `anno` con vincolo di referenza esterna a `anno` della relazione `album`.
 $$
 \text{audizioni} \equiv \{\underline{id} \text{, data, ora, titolo, anno}\}
 $$
@@ -328,3 +344,4 @@ $$
 [er]: img/ER.png
 [etichetta-bis]: img/Etichetta-bis.png
 [universitario-bis]: img/Universitario-bis.png
+[universitario-tris]: img/Universitario-tris.png
