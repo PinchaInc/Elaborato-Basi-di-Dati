@@ -331,6 +331,17 @@ $$
 \text{audizioni} \equiv \{\underline{id} \text{, data, ora, titolo, anno}\}
 $$
 
+#### Partecipazione
+
+L'associazione `Partecipazione` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione. Come lista degli attributi i propri attributi con l'aggiunta degli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna.
+Inoltre gli identificatori esterni faranno anche da chiave primaria della relazione.
+$$
+\text{partecipazioni} \equiv \{\underline{partecipante} \text{, } \underline{audizione} \text{, gradimento, commento}\}
+$$
+dove:
+- `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
+- `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
+
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
