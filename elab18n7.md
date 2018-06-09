@@ -342,6 +342,61 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
+### Tabelle di relazione
+
+#### Artisti
+
+| Nome attributo | Tipo        |             | Vincoli |
+| -------------- | ----        | ----        | ------- |
+| nome_arte      | varchar(30) | primary key |         |
+| nome           | varchar(20) | not null    |         |
+| cognome        | varchar(20) | not null    |         |
+| data_nascita   | date        | not null    |         |
+
+#### Album
+
+| Nome attributo | Tipo        |             | Vincoli        |
+| -------------- | ----        | ----        | -------        |
+| titolo         | varchar(30) | primary key |                |
+| anno           | intero      | primaty key |                |
+| genere         | varchar(10) | not null    |                |
+| etichetta      | varchar(25) | not null    | etichette.nome |
+
+#### Etichette
+
+| Nome attributo | Tipo        |                   | Vincoli |
+| -------------- | ----        | ----              | ------- |
+| nome           | varchar(25) | primary key       |         |
+| telefono       | varchar(15) | not null - unique |         |
+| via            | varchar(25) | not null          |         |
+| numero_civico  | integer     | not null          |         |
+| cap            | integer     | not null          |         |
+
+#### Audizioni
+
+| Nome attributo | Tipo    |             | Vincoli |
+| -------------- | ----    | ----        | ------- |
+| id             | integer | primary key |         |
+| data           | date    | not null    |         |
+| ora            | ?       | not null    |         |
+
+#### Universitari
+
+| Nome attributo    | Tipo        |             | Vincoli |
+| --------------    | ----        | ----        | ------- |
+| matricola         | integer     | primary key |         |
+| nome              | varchar(20) | not null    |         |
+| cognome           | varchar(20) | not null    |         |
+| via               | varchar(25) | not null    |         |
+| numero_civico     | integer     | not null    |         |
+| cap               | integer     | not null    |         |
+| tipo              | varchar(10) | not null    |         |
+| area_disciplinare | varchar(30) |             |         |
+| email             | varchar(50) |             |         |
+| anno_iscrizione   | integer     |             |         |
+| corso             | varchar(30) |             |         |
+
+
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
