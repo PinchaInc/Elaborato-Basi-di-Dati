@@ -2,7 +2,7 @@
 
 Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
 <font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, <u>l'indirizzo</u> e il numero di telefono</font>.
-L'istituto organizza su richiesta, sedute di audizione di un album da parte degli <font color="red"><u>interessati</u></font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
+<font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red"><u>interessati</u></font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
 
 **Legenda**
 
@@ -27,6 +27,15 @@ L'entità `Artista` è composta da quattro attributi. Il `nome` e il `cognome` d
 
 ![artista][]
 
+| Nome attributo  | Descrizione                                                | Tipo                                    |  ID  |
+| --------------- | ---------------------------------------------------------- | --------------------------------------- | :--: |
+| nome d'arte     | Il nome con cui l'artista è conosciuto dal grande pubblico | stringa<br />variabile<br />max 30 char |  si  |
+| nome            | Il nome dell'artista                                       | stringa<br />variabile<br />max 20 char |  no  |
+| cognome         | Il cognome dell'artista                                    | stringa<br />variabile<br />max 20 char |  no  |
+| data di nascita | Giorno, mese e anno in cui è nato l'artista                | data                                    |  no  |
+
+---
+
 ##### Album 
 
 > Di ogni **album** si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere se il supporto dove il disco è memorizzato
@@ -37,6 +46,15 @@ Tutti i campi sono obbligatori.
 
 ![album][]
 
+| Nome attributo | Descrizione                                       | Tipo                                    | ID   |
+| -------------- | ------------------------------------------------- | --------------------------------------- | ---- |
+| titolo         | Il nome che è stato assegnato all'album           | stringa<br />variabile<br />max 30 char | si   |
+| anno           | L'anno in cui è stato pubblicato l'album          | intero                                  | si   |
+| genere         | Il genere di appartenenza delle tracce dell'album | enumerabile                             | no   |
+| supporto       | Il supporto fisico su cui è stato inciso l'album  | enumerabile                             | no   |
+
+---
+
 ##### Etichetta
 
 > Di ogni **etichetta** si deve indicare il nome, l'indirizzo e il numero di telefono
@@ -45,6 +63,14 @@ L'entità `Etichetta` è composta da tre attributi. Il `nome` commerciale dell'e
 Tutti i campi sono obbligatori.
 
 ![etichetta][]
+
+| Nome attributo | Descrizione                                                  | Tipo                                    | ID   |
+| -------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
+| nome           | Nome commerciale con sui è conosciuta l'etichetta            | stringa<br />variabile<br />max 25 char | si   |
+| indirizzo      | L'indirizzo della sede dell'etichetta. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
+| telefono       | Il numero, o i numeri di telefono appartenenti all'etichetta. L'etichetta deve possedere almeno un numero | intero                                  | no   |
+
+---
 
 ##### Docente e studente
 
@@ -58,6 +84,17 @@ Tutti i campi sono obbligatori.
 
 ![universitario][]
 
+| Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
+| ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
+| matricola         | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
+| nome              | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
+| cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
+| indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
+| area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
+| email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
+
+---
+
 ##### Audizione
 
 > Per ogni **audizione** si conserva un numero progressivo di identificazione, data ed ora dell'audizione
@@ -66,6 +103,14 @@ L'entità audizione è composta da tre attributi: l'`ID` che identifica univocam
 Tutti i campi sono obbligatori.
 
 ![audizione][]
+
+| Nome attributo  | Descrizione                                               | Tipo    | ID   |
+| --------------- | --------------------------------------------------------- | ------- | ---- |
+| ID              | Codice identificativo dell'audizione                      | intero  | si   |
+| data            | Giorno, mese, anno in cui si svolge l'audizione           | data    | no   |
+| ora             | Ora in cui si svolge l'audizione                          | ora     | no   |
+
+---
 
 #### Associazioni
 
@@ -80,6 +125,13 @@ Quest'associazione non ha attributi propri.
 
 ![incisione][]
 
+| Entità coinvolta | Rapporto di cardinalità |
+| :--------------: | :---------------------: |
+|     Artista      |           0,n           |
+|      Album       |           1,n           |
+
+---
+
 ##### Pubblicazione
 
 > Ogni album viene **pubblicato** da una sola etichetta
@@ -90,6 +142,13 @@ Un etichetta può pubblicare più album, cosicché può non averne pubblicati pe
 Quest'associazione non ha attributi propri.
 
 ![pubblicazione][]
+
+| Entità coinvolta | Rapporto di cardinalità |
+| :--------------: | :---------------------: |
+| Album            | 1,1                     |
+| Etichetta        | 0,n                     |
+
+---
 
 ##### Partecipazione
 
@@ -102,102 +161,6 @@ Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione comp
 
 ![partecipazione][]
 
-##### Ascolto
-
-> L'istituto organizza su richiesta, sedute di audizione di un album
-
-L'entità `Album` e l'entità `Audizione` sono legati dall'associazione `Ascolto`.
-Durante un audizione può essere ascoltato uno e un solo album, per cui ha molteplicità $(1,1)$.
-Un album può essere ascoltato durante più audizioni o durante nessuna di esse per cui ha relazione $(0,n)$.
-Quest'associazione non ha attributi propri.
-
-![ascolto][]
-
----
-
-### Tabelle per la documentazione
-
-#### Tabella delle entità
-
-##### Artista
-
-| Nome attributo  | Descrizione                                                | Tipo                                    |  ID  |
-| --------------- | ---------------------------------------------------------- | --------------------------------------- | :--: |
-| nome d'arte     | Il nome con cui l'artista è conosciuto dal grande pubblico | stringa<br />variabile<br />max 30 char |  si  |
-| nome            | Il nome dell'artista                                       | stringa<br />variabile<br />max 20 char |  no  |
-| cognome         | Il cognome dell'artista                                    | stringa<br />variabile<br />max 20 char |  no  |
-| data di nascita | Giorno, mese e anno in cui è nato l'artista                | data                                    |  no  |
-
-##### Album
-
-| Nome attributo | Descrizione                                       | Tipo                                    | ID   |
-| -------------- | ------------------------------------------------- | --------------------------------------- | ---- |
-| titolo         | Il nome che è stato assegnato all'album           | stringa<br />variabile<br />max 30 char | si   |
-| anno           | L'anno in cui è stato pubblicato l'album          | intero                                  | si   |
-| genere         | Il genere di appartenenza delle tracce dell'album | enumerabile                             | no   |
-| supporto       | Il supporto fisico su cui è stato inciso l'album  | enumerabile                             | no   |
-
----
-
-##### Etichetta
-
-| Nome attributo | Descrizione                                                  | Tipo                                    | ID   |
-| -------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
-| nome           | Nome commerciale con sui è conosciuta l'etichetta            | stringa<br />variabile<br />max 25 char | si   |
-| indirizzo      | L'indirizzo della sede dell'etichetta. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
-| telefono       | Il numero, o i numeri di telefono appartenenti all'etichetta. L'etichetta deve possedere almeno un numero | intero                                  | no   |
-
-##### Docente
-
-| Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
-| ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
-| matricola         | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
-| nome              | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
-| cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
-| indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
-| area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
-| email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
-
----
-
-##### Studente
-
-| Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
-| ------------------ | ------------------------------------------------------------ | --------------------------------------- | ---- |
-| matricola          | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
-| nome               | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
-| cognome            | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
-| indirizzo          | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
-| anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
-| corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
-
-##### Audizione
-
-| Nome attributo  | Descrizione                                               | Tipo    | ID   |
-| --------------- | --------------------------------------------------------- | ------- | ---- |
-| ID              | Codice identificativo dell'audizione                      | intero  | si   |
-| data            | Giorno, mese, anno in cui si svolge l'audizione           | data    | no   |
-| ora             | Ora in cui si svolge l'audizione                          | ora     | no   |
-
-#### Tabelle delle associazioni
-
-##### Incisione
-
-| Entità coinvolta | Rapporto di cardinalità |
-| :--------------: | :---------------------: |
-|     Artista      |           0,n           |
-|      Album       |           1,n           |
-
----
-
-##### Pubblicazione
-
-| Entità coinvolta | Rapporto di cardinalità |
-| :--------------: | :---------------------: |
-| Album            | 1,1                     |
-| Etichetta        | 0,n                     |
-
-##### Partecipazione
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
@@ -209,7 +172,18 @@ Quest'associazione non ha attributi propri.
 | commento       | Giudizio esteso sull'audizione    | stringa<br />variabile<br />max 1000 char | no   |
 | gradimento     | Giudizio sintetico sull'audizione | enumerabile                               | no   |
 
+---
+
 ##### Ascolto
+
+> L'istituto organizza su richiesta, sedute di audizione di un album
+
+L'entità `Album` e l'entità `Audizione` sono legati dall'associazione `Ascolto`.
+Durante un audizione può essere ascoltato uno e un solo album, per cui ha molteplicità $(1,1)$.
+Un album può essere ascoltato durante più audizioni o durante nessuna di esse per cui ha relazione $(0,n)$.
+Quest'associazione non ha attributi propri.
+
+![ascolto][]
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
@@ -218,7 +192,7 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-#### Vincoli e derivazioni
+### Vincoli e derivazioni
 
 | Nome regola     | Descrizione regola                                                                                   |
 | --------------- | ---------------------------------------------------------                                            |
@@ -230,7 +204,6 @@ Quest'associazione non ha attributi propri.
 | RV6             | `Persona.matricola` deve essere unica.                                                               |
 | RV7             | `Audizione.ID` deve essere unico.                                                                    |
 | RV8             | `Partecipazione.gradimento` può assumere uno dei seguenti valori: basso, normale, alto.              |
-| RV9             | `Partecipazione.commento` può essere al massimo lungo 1000 caratteri.                                |
 
 ### Modello E-R
 
