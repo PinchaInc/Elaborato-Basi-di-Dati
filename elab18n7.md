@@ -78,7 +78,7 @@ Tutti i campi sono obbligatori.
 
 ##### Universitario
 
-> (docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
+> gli interessati(docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
 
 L'entità `Universitario` è composta dal `nome`, dal `cognome`, dall'`indirizzo` e dalla `matricola`. Quest'ultima vine usata come identificatore.
 Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri. Mentre l'attributo `indirizzo` è un attributo composto dall'attributo `via`, il `numero civico` e il `cap`.
@@ -90,7 +90,9 @@ Tutti i campi sono obbligatori.
 
 ![universitario][]
 
-##### Universitario
+---
+
+###### Universitario
 
 | Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
 | ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -99,14 +101,14 @@ Tutti i campi sono obbligatori.
 | cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
 | indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
 
-##### Studente
+###### Studente
 
 | Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
 | -----------------  | ------------------------------------------------------------ | --------------------------------------- | ---- |
 | anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
 | corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
 
-##### Docente
+###### Docente
 
 | Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
 | ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -390,6 +392,8 @@ $$
 | numero_civico  | integer     | not null          |         |
 | cap            | integer     | not null          |         |
 
+---
+
 #### Audizioni
 
 | Nome attributo | Tipo        |             | Vincoli      |
@@ -423,6 +427,8 @@ $$
 | artista        | varchar(30) | not null | artisti.nome_d'arte |
 | titolo         | varchar(30) | not null | album.titolo        |
 | anno           | integer     | not null | album.anno          |
+
+---
 
 #### Partecipazioni
 
