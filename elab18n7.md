@@ -41,7 +41,7 @@ Tutti e quattro i campi sono obbligatori.
 
 > Di ogni album si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere il supporto dove il disco è memorizzato
 
-L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, bluse, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo supporto è multivalore.
+L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo supporto è multivalore.
 Il titolo e l'anno di pubblicazione vengono usati come identificatori, quindi si possono avere due album con lo stesso titolo, ma pubblicati in anni diversi.
 Per il valore dell'attributo `titolo` sono stati garantiti 30 caratteri.
 Tutti i campi sono obbligatori.
@@ -304,7 +304,7 @@ $$
 
 L'entità `Supporto` presenta un identificatore interno per cui viene tradotta in una relazione avente lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
 $$
-\text{supporti} \equiv \{\underline{tipo}\text{, dimensione}\}
+\text{supporti} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \}
 $$
 
 ---
@@ -352,10 +352,10 @@ dove:
 
 #### Memoria
 
-L'associazione `Memoria` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento nella relazione dell'entità dal lato uno.
-Visto che l'associazione non presenta attributi propri, alla relazione `supporti` vengono aggiunti solo i campi `titolo`, con vincolo di referenza esterna a `titolo` nella relazione `album`, e `anno`, con vincolo di referenza esterna a `anno` nella relazione `album`.
+L'associazione `Memoria` è un'associazione uno a molti, in questo caso si è scelto di creare una nuova relazione che avrà lo stesso nome dell'associazione.
+Visto che l'associazione non presenta attributi propri, vengono aggiunti gli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna. Inoltre gli identificatori della relazione dal lato uno faranno anche da chiave primaria della relazione.
 $$
-\text{supporti} \equiv \{\underline{tipo} \text{, dimensione, titolo, anno}\}
+\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{, titolo, anno}\}
 $$
 
 ---
@@ -435,12 +435,19 @@ $$
 
 #### Supporti
 
-| Nome attributo | Tipo        |             | Vincoli      |
-| -------------- | ----------- | ----------- | ------------ |
-| tipo           | varchar(10) | primary key |              |
-| dimensione     | integer     | not null    |              |
-| titolo         | varchar(30) | not null    | album.titolo |
-| anno           | integer     | not null    | album.anno   |
+| Nome attributo | Tipo        |             | Vincoli |
+| -------------- | ----------- | ----------- | ------- |
+| tipo           | varchar(10) | primary key |         |
+| dimensione     | integer     | primary key |         |
+
+#### Memorie
+
+| Nome attributo | Tipo        |             | Vincoli             |
+| -------------- | ----------- | ----------- | ------------------- |
+| tipo           | varchar(10) | primary key | supporti.tipo       |
+| dimensione     | integer     | primary key | supporti.dimensione |
+| titolo         | varchar(30) | not null    | album.titolo        |
+| anno           | integer     | not null    | album.anno          |
 
 [studente]: img/Studente.png
 [album]: img/Album.png
