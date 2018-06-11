@@ -362,6 +362,46 @@ $$
 
 ---
 
+### Schema del database
+
+$$
+\text{artisti} \equiv \{\underline{\text{nome_arte}} \text{, nome, cognome, data di nascita}\}
+$$
+
+$$
+\text{etichette} \equiv \{\underline{nome} \text{, telefono, via, numero_civico, cap}\}
+$$
+
+$$
+\text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere, etichetta}\}
+$$
+
+$$
+\text{audizioni} \equiv \{\underline{id} \text{, data, ora, titolo, anno}\}
+$$
+
+$$
+\text{universitari} \equiv \{\underline{matricola} \text{, nome, cognome, via, numero_civico, cap, tipo, area_disciplinare, email, corso, anno_iscrizione}\}
+$$
+
+$$
+\text{supporti} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \}
+$$
+
+$$
+\text{incisioni} \equiv \{\underline{artista} \text{, } \underline{titolo} \text{, } \underline{anno}\}
+$$
+
+$$
+\text{partecipazioni} \equiv \{\underline{partecipante} \text{, } \underline{audizione} \text{, gradimento, commento}\}
+$$
+
+$$
+\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{, titolo, anno}\}
+$$
+
+---
+
 ### Tabelle di relazione
 
 #### Artisti
