@@ -228,6 +228,8 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
 
+![supporto][]
+
 #### Trasformazione della generalizzazione
 
 Durante la progettazione concettuale le entità `Studente` e `Docente` sono state generalizzate nell'entità `Universitario`, ma per poter passare alla progettazione logica incontriamo la necessita di eliminare la generalizzazione.
@@ -274,6 +276,15 @@ $$
 $$
 
 
+
+#### Supporto
+
+L'entità `Supporto` presenta un identificatore interno per cui viene tradotta in una relazione avente lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
+$$
+\text{supporti} \equiv \{\underline{tipo}\text{, dimensione}\}
+$$
+
+
 ### Traduzione delle associazioni
 
 #### Incisione
@@ -290,7 +301,7 @@ dove:
 
 #### Pubblicazione
 
-L'associazione `Publicazione` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento della relazione nell'entità dal alto uno.
+L'associazione `Pubblicazione` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento nella relazione dell'entità dal lato uno.
 Visto che l'associazione non presenta attributi propri, alla relazione `album` vene aggiunto solo il campo `etichetta` con vincolo di referenza esterna a `nome` nella relazione `etichette`.
 $$
 \text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere, etichetta}\}
@@ -298,8 +309,8 @@ $$
 
 #### Ascolto
 
-L'associazione `Ascolto` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento della relazione nell'entità dal alto uno.
-Visto che l'associazione non presenta attributi propri, alla relazione `audizione` vengono aggiunti solo i campi `titolo` con vincolo di referenza esterna a `nome` nella relazione `album` e `anno` con vincolo di referenza esterna a `anno` della relazione `album`.
+L'associazione `Ascolto` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento nella relazione dell'entità dal lato uno.
+Visto che l'associazione non presenta attributi propri, alla relazione `audizione` vengono aggiunti solo i campi `titolo`, con vincolo di referenza esterna a `titolo` nella relazione `album`, e `anno`, con vincolo di referenza esterna a `anno` della relazione `album`.
 $$
 \text{audizioni} \equiv \{\underline{id} \text{, data, ora, titolo, anno}\}
 $$
@@ -315,6 +326,17 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
+
+
+####Memoria
+
+L'associazione `Memoria` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento nella relazione dell'entità dal lato uno.
+Visto che l'associazione non presenta attributi propri, alla relazione `supporti` vengono aggunti solo i campi `titolo`, con vincolo di referenza esterna a `titolo` nella relazione `album`,  e `anno`, con vincolo di referenza esterna a `anno` nella relazione `album`.
+$$
+\text{supporti} \equiv \{\underline{tipo} \text{, dimensione, titolo, anno}\}
+$$
+
+
 ### Tabelle di relazione
 
 #### Artisti
@@ -329,9 +351,9 @@ dove:
 #### Album
 
 | Nome attributo | Tipo        |             | Vincoli        |
-| -------------- | ----        | ----        | -------        |
+| -------------- | ----------- | ----------- | -------------- |
 | titolo         | varchar(30) | primary key |                |
-| anno           | intero      | primaty key |                |
+| anno           | integer     | primary key |                |
 | genere         | varchar(10) | not null    |                |
 | etichetta      | varchar(25) | not null    | etichette.nome |
 
@@ -347,16 +369,18 @@ dove:
 
 #### Audizioni
 
-| Nome attributo | Tipo    |             | Vincoli |
-| -------------- | ----    | ----        | ------- |
-| id             | integer | primary key |         |
-| data           | date    | not null    |         |
-| ora            | ?       | not null    |         |
+| Nome attributo | Tipo        |             | Vincoli      |
+| -------------- | ----------- | ----------- | ------------ |
+| id             | integer     | primary key |              |
+| data           | date        | not null    |              |
+| ora            | ?           | not null    |              |
+| titolo         | varchar(30) | not null    | album.titolo |
+| anno           | integer     | not null    | album.anno   |
 
 #### Universitari
 
 | Nome attributo    | Tipo        |             | Vincoli |
-| --------------    | ----        | ----        | ------- |
+| ----------------- | ----------- | ----------- | ------- |
 | matricola         | integer     | primary key |         |
 | nome              | varchar(20) | not null    |         |
 | cognome           | varchar(20) | not null    |         |
@@ -369,7 +393,33 @@ dove:
 | anno_iscrizione   | integer     |             |         |
 | corso             | varchar(30) |             |         |
 
+####Incisioni
 
+| Nome attributo | Tipo        |          | Vincoli             |
+| -------------- | ----------- | -------- | ------------------- |
+| artista        | varchar(30) | not null | artisti.nome_d'arte |
+| titolo         | varchar(30) | not null | album.titolo        |
+| anno           | integer     | not null | album.anno          |
+
+####Partecipazioni
+
+| Nome attributo | Tipo          |             | Vincoli                |
+| -------------- | ------------- | ----------- | ---------------------- |
+| partecipante   | integer       | primary key | universitari.matricola |
+| audizione      | integer       | primary key | audizioni.id           |
+| gradimento     | varchar(10)   |             |                        |
+| commento       | varchar(1000) |             |                        |
+
+
+
+#### Supporti
+
+| Nome attributo | Tipo        |             | Vincoli      |
+| -------------- | ----------- | ----------- | ------------ |
+| tipo           | varchar(10) | primary key |              |
+| dimensione     | integer     | not null    |              |
+| titolo         | varchar(30) | not null    | album.titolo |
+| anno           | integer     | not null    | album.anno   |
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
@@ -384,3 +434,4 @@ dove:
 [etichetta-bis]: img/Etichetta-bis.png
 [universitario-bis]: img/Universitario-bis.png
 [universitario-tris]: img/Universitario-tris.png
+[supporto]: img/Supporto.png
