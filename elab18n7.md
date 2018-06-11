@@ -255,6 +255,8 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
 
+![supporto][]
+
 #### Trasformazione della generalizzazione
 
 Durante la progettazione concettuale le entità `Studente` e `Docente` sono state generalizzate nell'entità `Universitario`, ma per poter passare alla progettazione logica incontriamo la necessita di eliminare la generalizzazione.
@@ -411,3 +413,4 @@ dove:
 [etichetta-bis]: img/Etichetta-bis.png
 [universitario-bis]: img/Universitario-bis.png
 [universitario-tris]: img/Universitario-tris.png
+[supporto]: img/Supporto.png
