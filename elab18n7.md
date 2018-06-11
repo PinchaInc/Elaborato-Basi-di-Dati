@@ -21,9 +21,10 @@ Uno istituto di formazione musicale vuole creare una base di dati per la propria
 
 ##### Artista
 
-> informazioni relative agli **artisti**: nome, cognome, data di nascita, nome d'arte
+> informazioni relative agli artisti: nome, cognome, data di nascita, nome d'arte
 
-L'entità `Artista` è composta da quattro attributi. Il `nome` e il `cognome` dell'artista, la `data di nascita` e il `nome d'arte`. Il nome d'arte viene usato come identificatori, quindi deve essere unico. Tutti e quattro i campi sono obbligatori.
+L'entità `Artista` è composta da quattro attributi. Il `nome` e il `cognome` dell'artista, la `data di nascita` e il `nome d'arte`. Il nome d'arte viene usato come identificatore, quindi deve essere unico. Per il `nome` e il `cognome` sono stati preposti 20 caratteri, mentre per il `nome d'arte` ne sono stati destinati 30.
+Tutti e quattro i campi sono obbligatori.
 
 ![artista][]
 
@@ -38,10 +39,11 @@ L'entità `Artista` è composta da quattro attributi. Il `nome` e il `cognome` d
 
 ##### Album 
 
-> Di ogni **album** si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere se il supporto dove il disco è memorizzato
+> Di ogni album si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere il supporto dove il disco è memorizzato
 
 L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, bluse, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo supporto è multivalore.
 Il titolo e l'anno di pubblicazione vengono usati come identificatori, quindi si possono avere due album con lo stesso titolo, ma pubblicati in anni diversi.
+Per il valore dell'attributo `titolo` sono stati garantiti 30 caratteri.
 Tutti i campi sono obbligatori.
 
 ![album][]
@@ -57,9 +59,11 @@ Tutti i campi sono obbligatori.
 
 ##### Etichetta
 
-> Di ogni **etichetta** si deve indicare il nome, l'indirizzo e il numero di telefono
+> Di ogni etichetta si deve indicare il nome, l'indirizzo e il numero di telefono
 
 L'entità `Etichetta` è composta da tre attributi. Il `nome` commerciale dell'etichetta, l'`indirizzo` della sede e il numero di `telefono`. Il nome dell'etichetta viene usato come identificatore, quindi deve essere unico.
+L'attributo `indirizzo` è un attributo composto dagli attributi semplici `via`, `numero civico` e `cap`. Per il campo `nome` sono stati riservati 25 caratteri.
+Visto che nel mondo reale non possono esistere due numeri di telefono uguali, allo stesso modo l'attributo `telefono` deve essere univoco.
 Tutti i campi sono obbligatori.
 
 ![etichetta][]
@@ -72,17 +76,21 @@ Tutti i campi sono obbligatori.
 
 ---
 
-##### Docente e studente
+##### Universitario
 
-> (**docenti** o **studenti**) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
+> (docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
 
-Le entità `Docente` e `Studente` sono entrambe individuate dal `nome`, dal `cognome` e dall'`indirizzo` e dalla `matricola`. Quest'ultima vine usata come identificatore.
-Nel caso di un studente vengono aggiunti anche gli attributi `anno di iscrizione` e il `corso` a cui sono iscritti.
-Nel caso di un docente vengono aggiunti anche gli attributi `area disciplinare` e `email` per l'email interna all'istituto.
-Per rappresentate queste due entità si è scelto di utilizzare una generalizzazione totale ed esclusiva, in quanto nel dominio del problema non esistono altri interessati oltre ai docenti e agli studenti e uno studente non può essere anche un docente o viceversa.
+L'entità `Universitario` è composta dal `nome`, dal `cognome`, dall'`indirizzo` e dalla `matricola`. Quest'ultima vine usata come identificatore.
+Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri. Mentre l'attributo `indirizzo` è un attributo composto dall'attributo `via`, il `numero civico` e il `cap`.
+L'entità `Universitario` viene a suo volta specializzata in due sotto-entità; il `Docente` e lo `Sudente`.
+Nel caso di un studente vengono aggiunti anche gli attributi `anno di iscrizione` e il `corso` a cui sono iscritti. Per quest'ultimo attributo sono stati preposti 30 caratteri.
+Nel caso di un docente vengono aggiunti anche gli attributi `area disciplinare` e `email` per l'email interna all'istituto. Per questi due attributi sono stati preposti rispettivamente 30 e 50 caratteri.
+In base al dominio applicativo possiamo afferire che si tratti di una generalizzazione totale ed esclusiva, in quanto nel dominio del problema non esistono altri interessati oltre ai docenti e agli studenti e uno studente non può essere anche un docente o viceversa.
 Tutti i campi sono obbligatori.
 
 ![universitario][]
+
+##### Universitario
 
 | Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
 | ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
@@ -90,6 +98,18 @@ Tutti i campi sono obbligatori.
 | nome              | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
 | cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
 | indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
+
+##### Studente
+
+| Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
+| -----------------  | ------------------------------------------------------------ | --------------------------------------- | ---- |
+| anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
+| corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
+
+##### Docente
+
+| Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
+| ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
 | area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
 | email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
 
@@ -97,7 +117,7 @@ Tutti i campi sono obbligatori.
 
 ##### Audizione
 
-> Per ogni **audizione** si conserva un numero progressivo di identificazione, data ed ora dell'audizione
+> Per ogni audizione si conserva un numero progressivo di identificazione, data ed ora dell'audizione
 
 L'entità audizione è composta da tre attributi: l'`ID` che identifica univocamente l'audizione, quindi verrà usato come identificatore, la `data` e l'`ora` in cui è avvenuta l'audizione.
 Tutti i campi sono obbligatori.
@@ -116,7 +136,7 @@ Tutti i campi sono obbligatori.
 
 ##### Incisione
 
-> Ogni artista può aver **inciso** più album, ed un album può essere stato **inciso** da più artisti
+> Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti
 
 L'entità `Album` e l'entità `Artista` sono legati dall'associazione `Incisione`. 
 Un artista può aver inciso più album, come può non averne inciso nessuno per cui ha una molteplicità $(0,n)$.
@@ -134,7 +154,7 @@ Quest'associazione non ha attributi propri.
 
 ##### Pubblicazione
 
-> Ogni album viene **pubblicato** da una sola etichetta
+> Ogni album viene pubblicato da una sola etichetta
 
 L'entità `Album` e l'entità `Etichetta` sono legati dall'associazione `Publicazione`.
 Un album deve essere pubblicato da una sola etichetta per cui ha molteplicità $(1,1)$.
@@ -154,9 +174,9 @@ Quest'associazione non ha attributi propri.
 
 > L'istituto organizza su richiesta, sedute di audizione di un album da parte degli interessati
 
-Le entità `Docenete` e `Studnete` e l'entità `Audizione` sono legati dall'associazione `Partecipazione`.
-Ad una audizione deve partecipare almeno un studente/docente per cui ha molteplicità $(1,n)$.
-Uno studente può naturalmente partecipare a più audizioni, così come non partecipare a nessuna audizione, per cui ha molteplicità $(0,n)$.
+L'entità `Universitario` e l'entità `Audizione` sono legati dall'associazione `Partecipazione`.
+Ad una audizione deve partecipare almeno un universitario per cui ha molteplicità $(1,n)$.
+Un universitario può naturalmente partecipare a più audizioni, così come non partecipare a nessuna audizione, per cui ha molteplicità $(0,n)$.
 Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione compreso in 1000 caratteri e `gradimento` un giudizio sintetico che può assumere i valori di basso, normale e alto.
 
 ![partecipazione][]
@@ -204,10 +224,13 @@ Quest'associazione non ha attributi propri.
 | RV6             | `Persona.matricola` deve essere unica.                                                               |
 | RV7             | `Audizione.ID` deve essere unico.                                                                    |
 | RV8             | `Partecipazione.gradimento` può assumere uno dei seguenti valori: basso, normale, alto.              |
+| RV9             | `Etichetta.telefono` deve essere unico                                                               |
 
 ### Modello E-R
 
 ![er][]
+
+---
 
 ## Progettazione logica
 
@@ -234,9 +257,11 @@ L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguir
 
 Durante la progettazione concettuale le entità `Studente` e `Docente` sono state generalizzate nell'entità `Universitario`, ma per poter passare alla progettazione logica incontriamo la necessita di eliminare la generalizzazione.
 Visto che ci troviamo difronte ad una generalizzazione totale ed esclusiva possiamo scegliere tra tre opzioni; trasformare la generalizzazione in un'associazione, far assorbire il padre nei figli e assorbire i figli nel padre. In questo caso abbiamo scelto di seguire quest'ultima opzione.
-I due figli(studente e docente) vengono eliminati, e i loro attributi aggiunti a quelli dell'entità padre. Questi nuovi attributi possono assumere il valore $NULL$. Inoltre all'entità `Universitario` viene aggiunto anche l'attributo `tipo`. Trovandoci in una generalizzazione totale ed esclusiva l'attributo `tipo` può assumere solo il valore docente e studente.
+I due figli(studente e docente) vengono eliminati, e i loro attributi aggiunti a quelli dell'entità padre. Questi nuovi attributi possono assumere il valore $NULL$. Inoltre all'entità `Universitario` viene aggiunto anche l'attributo `tipo`. Trovandoci in una generalizzazione totale ed esclusiva l'attributo `tipo` può assumere solo il valore docente o studente, ma non entrambi.
 
 ![universitario-tris][]
+
+---
 
 ### Traduzione di entità
 
@@ -275,8 +300,6 @@ $$
 \text{universitari} \equiv \{\underline{matricola} \text{, nome, cognome, via, numero_civico, cap, tipo, area_disciplinare, email, corso, anno_iscrizione}\}
 $$
 
-
-
 #### Supporto
 
 L'entità `Supporto` presenta un identificatore interno per cui viene tradotta in una relazione avente lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
@@ -284,6 +307,7 @@ $$
 \text{supporti} \equiv \{\underline{tipo}\text{, dimensione}\}
 $$
 
+---
 
 ### Traduzione delle associazioni
 
@@ -326,16 +350,15 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
-
-
-####Memoria
+#### Memoria
 
 L'associazione `Memoria` è un'associazione uno a molti, in questo caso si è scelto di operare l'assorbimento nella relazione dell'entità dal lato uno.
-Visto che l'associazione non presenta attributi propri, alla relazione `supporti` vengono aggunti solo i campi `titolo`, con vincolo di referenza esterna a `titolo` nella relazione `album`,  e `anno`, con vincolo di referenza esterna a `anno` nella relazione `album`.
+Visto che l'associazione non presenta attributi propri, alla relazione `supporti` vengono aggiunti solo i campi `titolo`, con vincolo di referenza esterna a `titolo` nella relazione `album`, e `anno`, con vincolo di referenza esterna a `anno` nella relazione `album`.
 $$
 \text{supporti} \equiv \{\underline{tipo} \text{, dimensione, titolo, anno}\}
 $$
 
+---
 
 ### Tabelle di relazione
 
@@ -393,7 +416,7 @@ $$
 | anno_iscrizione   | integer     |             |         |
 | corso             | varchar(30) |             |         |
 
-####Incisioni
+#### Incisioni
 
 | Nome attributo | Tipo        |          | Vincoli             |
 | -------------- | ----------- | -------- | ------------------- |
@@ -401,7 +424,7 @@ $$
 | titolo         | varchar(30) | not null | album.titolo        |
 | anno           | integer     | not null | album.anno          |
 
-####Partecipazioni
+#### Partecipazioni
 
 | Nome attributo | Tipo          |             | Vincoli                |
 | -------------- | ------------- | ----------- | ---------------------- |
@@ -409,8 +432,6 @@ $$
 | audizione      | integer       | primary key | audizioni.id           |
 | gradimento     | varchar(10)   |             |                        |
 | commento       | varchar(1000) |             |                        |
-
-
 
 #### Supporti
 
@@ -420,6 +441,7 @@ $$
 | dimensione     | integer     | not null    |              |
 | titolo         | varchar(30) | not null    | album.titolo |
 | anno           | integer     | not null    | album.anno   |
+
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
