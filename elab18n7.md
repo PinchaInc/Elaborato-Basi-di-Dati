@@ -354,10 +354,10 @@ dove:
 
 #### Memoria
 
-L'associazione `Memoria` è un'associazione uno a molti, in questo caso si è scelto di creare una nuova relazione che avrà lo stesso nome dell'associazione.
+L'associazione `Memoria` è un'associazione molti a molti, che si traduce in una relazione che avrà lo stesso nome dell'associazione.
 Visto che l'associazione non presenta attributi propri, vengono aggiunti gli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna. Inoltre gli identificatori della relazione dal lato uno faranno anche da chiave primaria della relazione.
 $$
-\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{, titolo, anno}\}
+\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{,} \underline{ titolo} \text{,} \underline{ anno}\}
 $$
 
 ---
@@ -397,7 +397,7 @@ $$
 $$
 
 $$
-\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{, titolo, anno}\}
+\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{,} \underline{ titolo} \text{,} \underline{ anno}\}
 $$
 
 ---
@@ -492,8 +492,8 @@ $$
 | -------------- | ----------- | ----------- | ------------------- |
 | tipo           | varchar(10) | primary key | supporti.tipo       |
 | dimensione     | integer     | primary key | supporti.dimensione |
-| titolo         | varchar(30) | not null    | album.titolo        |
-| anno           | integer     | not null    | album.anno          |
+| titolo         | varchar(30) | primary key | album.titolo        |
+| anno           | integer     | primary key | album.anno          |
 
 [studente]: img/Studente.png
 [album]: img/Album.png
