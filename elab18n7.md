@@ -1,16 +1,14 @@
 # ELAB18N7 Collezione di Dischi
 
 Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
-<font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, <u>l'indirizzo</u> e il numero di telefono</font>.
-<font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red"><u>interessati</u></font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
+<font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, l'indirizzo e il numero di telefono</font>.
+<font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red">interessati</font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e Indirizzo</font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. <font color="blue">Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un</font> <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
 
 **Legenda**
 
 - <font color="red">Entità</font>
-- <font color="red"><u>Entità composta</u></font>
 - <font color="blue">Associazioni</font>
 - <font color="green">Attributi</font>
-- <font color="green"><u>Attributi composti</u></font>
 
 ---
 ## Progettazione concettuale
@@ -41,7 +39,7 @@ Tutti e quattro i campi sono obbligatori.
 
 > Di ogni album si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere il supporto dove il disco è memorizzato
 
-L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo supporto è multivalore.
+L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo potrà assumere anche il valore entrambi.
 Il titolo e l'anno di pubblicazione vengono usati come identificatori, quindi si possono avere due album con lo stesso titolo, ma pubblicati in anni diversi.
 Per il valore dell'attributo `titolo` sono stati garantiti 30 caratteri.
 Tutti i campi sono obbligatori.
@@ -61,8 +59,8 @@ Tutti i campi sono obbligatori.
 
 > Di ogni etichetta si deve indicare il nome, l'indirizzo e il numero di telefono
 
-L'entità `Etichetta` è composta da tre attributi. Il `nome` commerciale dell'etichetta, l'`indirizzo` della sede e il numero di `telefono`. Il nome dell'etichetta viene usato come identificatore, quindi deve essere unico.
-L'attributo `indirizzo` è un attributo composto dagli attributi semplici `via`, `numero civico` e `cap`. Per il campo `nome` sono stati riservati 25 caratteri.
+L'entità `Etichetta` è composta da tre attributi. Il `nome` commerciale dell'etichetta, il numero di `telefono` e l'`indirizzo` della sede. Quest'ultimo viene ulteriormente scomposto in `via`, `numero civico` e `cap`. 
+Il nome dell'etichetta viene usato come identificatore, quindi deve essere unico. Inoltre per il campo `nome` sono stati riservati 25 caratteri.
 Visto che nel mondo reale non possono esistere due numeri di telefono uguali, allo stesso modo l'attributo `telefono` deve essere univoco.
 Tutti i campi sono obbligatori.
 
@@ -174,12 +172,12 @@ Quest'associazione non ha attributi propri.
 
 ##### Partecipazione
 
-> L'istituto organizza su richiesta, sedute di audizione di un album da parte degli interessati
+> Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un commento generale, il livello di gradimento.
 
 L'entità `Universitario` e l'entità `Audizione` sono legati dall'associazione `Partecipazione`.
 Ad una audizione deve partecipare almeno un universitario per cui ha molteplicità $(1,n)$.
 Un universitario può naturalmente partecipare a più audizioni, così come non partecipare a nessuna audizione, per cui ha molteplicità $(0,n)$.
-Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione compreso in 1000 caratteri e `gradimento` un giudizio sintetico che può assumere i valori di basso, normale e alto.
+Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione compreso in 1000 caratteri e `gradimento` un giudizio sintetico che può assumere i valori di basso, normale e alto. L'interessato può lasciare o meno il proprio commento e il gradimento per cui i due attributi hanno una molteplicità $(0,1)$ e quindi possono assumere il valore $NULL$.
 
 ![partecipazione][]
 
@@ -240,7 +238,7 @@ Quest'associazione non ha attributi propri.
 
 #### Trasformazioni di attributi composti in attributi semplici
 
-L'entità `Etichetta` e l'entità `Unversitario` presentano tra i loro attributi l'attributo complesso `indirizzo` per poter passare dalla progettazione concettuale a quella logica dobbiamo eliminare questo attributo composto; per fare ciò si è scelto di scogliere l'attributo complesso in più attributi semplici.
+L'entità `Etichetta` e l'entità `Unversitario` presentano tra i loro attributi l'attributo complesso `indirizzo` per poter passare dalla progettazione concettuale a quella logica dobbiamo eliminare questo attributo composto; per fare ciò si è scelto di sciogliere l'attributo complesso in più attributi semplici.
 Per cui l'entità `Etichetta` sarà così trasformata:
 
 ![etichetta-bis][]
