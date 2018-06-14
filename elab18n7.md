@@ -1,16 +1,14 @@
 # ELAB18N7 Collezione di Dischi
 
 Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
-<font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, <u>l'indirizzo</u> e il numero di telefono</font>.
-<font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red"><u>interessati</u></font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
+<font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, l'indirizzo e il numero di telefono</font>.
+<font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red">interessati</font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e <u>Indirizzo</u></font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
 
 **Legenda**
 
 - <font color="red">Entità</font>
-- <font color="red"><u>Entità composta</u></font>
 - <font color="blue">Associazioni</font>
 - <font color="green">Attributi</font>
-- <font color="green"><u>Attributi composti</u></font>
 
 ---
 ## Progettazione concettuale
@@ -41,7 +39,7 @@ Tutti e quattro i campi sono obbligatori.
 
 > Di ogni album si vuole sapere il titolo, l'anno di pubblicazione ed il genere...Inoltre è necessario sapere il supporto dove il disco è memorizzato
 
-L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere o il valore di vinile o di CD. Visto che un album può essere stato memorizzato su entrambi i supporti l'attributo supporto è multivalore.
+L'entità `Album` è composta da quattro attributi. Il `titolo` dell'album, l'`anno` in cui è stato pubblicato e il `genere`. Quest'ultimo attributo può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. Inoltre è presente anche l'attributo `supporto` che indica il supporto su cui è memorizzato l'album. Quest'attributo può assumere il valore di vinile, di CD o entrambi.
 Il titolo e l'anno di pubblicazione vengono usati come identificatori, quindi si possono avere due album con lo stesso titolo, ma pubblicati in anni diversi.
 Per il valore dell'attributo `titolo` sono stati garantiti 30 caratteri.
 Tutti i campi sono obbligatori.
@@ -85,7 +83,7 @@ Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri. Mentre l'
 L'entità `Universitario` viene a suo volta specializzata in due sotto-entità; il `Docente` e lo `Sudente`.
 Nel caso di un studente vengono aggiunti anche gli attributi `anno di iscrizione` e il `corso` a cui sono iscritti. Per quest'ultimo attributo sono stati preposti 30 caratteri.
 Nel caso di un docente vengono aggiunti anche gli attributi `area disciplinare` e `email` per l'email interna all'istituto. Per questi due attributi sono stati preposti rispettivamente 30 e 50 caratteri.
-In base al dominio applicativo possiamo afferire che si tratti di una generalizzazione totale ed esclusiva, in quanto nel dominio del problema non esistono altri interessati oltre ai docenti e agli studenti e uno studente non può essere anche un docente o viceversa.
+In base al dominio applicativo possiamo asserire che si tratti di una generalizzazione totale ed esclusiva, in quanto nel dominio del problema non esistono altri interessati oltre ai docenti e agli studenti e uno studente non può essere anche un docente o viceversa.
 Tutti i campi sono obbligatori.
 
 ![universitario][]
@@ -158,7 +156,7 @@ Quest'associazione non ha attributi propri.
 
 > Ogni album viene pubblicato da una sola etichetta
 
-L'entità `Album` e l'entità `Etichetta` sono legati dall'associazione `Publicazione`.
+L'entità `Album` e l'entità `Etichetta` sono legati dall'associazione `Pubblicazione`.
 Un album deve essere pubblicato da una sola etichetta per cui ha molteplicità $(1,1)$.
 Un etichetta può pubblicare più album, cosicché può non averne pubblicati per cui ha molteplicità $(0,n)$.
 Quest'associazione non ha attributi propri.
@@ -172,27 +170,22 @@ Quest'associazione non ha attributi propri.
 
 ---
 
-##### Partecipazione
 
-> L'istituto organizza su richiesta, sedute di audizione di un album da parte degli interessati
+##### Richiesta
 
-L'entità `Universitario` e l'entità `Audizione` sono legati dall'associazione `Partecipazione`.
-Ad una audizione deve partecipare almeno un universitario per cui ha molteplicità $(1,n)$.
-Un universitario può naturalmente partecipare a più audizioni, così come non partecipare a nessuna audizione, per cui ha molteplicità $(0,n)$.
-Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione compreso in 1000 caratteri e `gradimento` un giudizio sintetico che può assumere i valori di basso, normale e alto.
+> L'istituto organizza su richiesta, sedute di audizione di un album
 
-![partecipazione][]
+L'entità `Universitario` e l'entità `Audizione` sono legati dall'associazione `Richiesta`.
+Un universitario può richiedere più audizioni, così come può non richiederne alcuna; per questo ha molteplicità $(0,n)$.
+Un'audizione può essere richiesta da più universitari, ma deve essere richiesta da almeno uno; per questo ha molteplicità $(1,n)$.
+Quest'associazione non ha attributi propri.
 
+![richiesta][]
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
-| docente/studente |           0,n           |
+|  Universitario   |           0,n           |
 |    Audizione     |           1,n           |
-
-| Nome attributo | Descrizione                       | Tipo                                      | ID   |
-| -------------- | --------------------------------- | ----------------------------------------- | ---- |
-| commento       | Giudizio esteso sull'audizione    | stringa<br />variabile<br />max 1000 char | no   |
-| gradimento     | Giudizio sintetico sull'audizione | enumerabile                               | no   |
 
 ---
 
@@ -209,24 +202,50 @@ Quest'associazione non ha attributi propri.
 
 | Entità coinvolta | Rapporto di cardinalità |
 | :--------------: | :---------------------: |
-| audizione        | 1,1                     |
-| Album            | 0,n                     |
+|    Audizione     |           1,1           |
+|      Album       |           0,n           |
 
 ---
 
+##### Partecipazione
+
+> Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un commento generale (1000 caratteri), il livello di gradimento (alto, normale, basso).
+
+L'entità `Universitario` e l'entità `Audizione` sono legati dall'associazione `Partecipazione`.
+Ad una audizione deve partecipare almeno un universitario per cui ha molteplicità $(1,n)$.
+Un universitario può naturalmente partecipare a più audizioni, così come non partecipare a nessuna audizione, per cui ha molteplicità $(0,n)$.
+Quest'associazione ha due attributi: `commento`, un giudizio sull'audizione compreso in 1000 caratteri e `gradimento` un giudizio sintetico che può assumere i valori di basso, normale e alto.
+Un universitario può anche decidere di non lasciar alcun commento o gradimento; per questo, la cardinalità di questi attributi è $(0,)$ 
+
+![partecipazione][]
+
+
+| Entità coinvolta | Rapporto di cardinalità |
+| :--------------: | :---------------------: |
+| docente/studente |           0,n           |
+|    Audizione     |           1,n           |
+
+| Nome attributo |            Descrizione            |                   Tipo                    |  ID  | Rapporto di cardinalità |
+| :------------: | :-------------------------------: | :---------------------------------------: | :--: | :---------------------: |
+|    commento    |  Giudizio esteso sull'audizione   | stringa<br />variabile<br />max 1000 char |  no  |           0,1           |
+|   gradimento   | Giudizio sintetico sull'audizione |                enumerabile                |  no  |           0,1           |
+
+---
+
+
 ### Vincoli e derivazioni
 
-| Nome regola     | Descrizione regola                                                                                   |
-| --------------- | ---------------------------------------------------------                                            |
-| RV1             | `Artista.nome d'arte` deve essere unico.                                                             |
-| RV2             | `Album.genere` può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. |
-| RV3             | `Album.supporto` può assumere o il valore vinile o il valore CD.                                     |
-| RV4             | la combinazione `Album.anno` e `Album.titolo` deve essere unica                                      |
-| RV5             | `Etichetta.nome` deve essere unico.                                                                  |
-| RV6             | `Persona.matricola` deve essere unica.                                                               |
-| RV7             | `Audizione.ID` deve essere unico.                                                                    |
-| RV8             | `Partecipazione.gradimento` può assumere uno dei seguenti valori: basso, normale, alto.              |
-| RV9             | `Etichetta.telefono` deve essere unico                                                               |
+| Nome regola | Descrizione regola                                           |
+| ----------- | ------------------------------------------------------------ |
+| RV1         | `Artista.nome d'arte` deve essere unico.                     |
+| RV2         | `Album.genere` può assumere uno dei seguenti valori: rock, pop, dance, classica, blues, jazz, indie. |
+| RV3         | `Album.supporto` può assumere il valore vinile, il valore CD o entrambi. |
+| RV4         | la combinazione `Album.anno` e `Album.titolo` deve essere unica |
+| RV5         | `Etichetta.nome` deve essere unico.                          |
+| RV6         | `Universitario.matricola` deve essere unica.                 |
+| RV7         | `Audizione.ID` deve essere unico.                            |
+| RV8         | `Partecipazione.gradimento` può assumere uno dei seguenti valori: basso, normale, alto. |
+| RV9         | `Etichetta.telefono` deve essere unico                       |
 
 ### Modello E-R
 
@@ -249,11 +268,7 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 ![universitario-bis][]
 
-#### Trasformazione degli attributi multivalore
 
-L'entità `Album` presenta l'attributo multivalore `supporto`. Per poter eseguire la progettazione logica dobbiamo trasformare l'attributo in un'associazione.
-
-![supporto][]
 
 #### Trasformazione della generalizzazione
 
@@ -302,14 +317,7 @@ $$
 \text{universitari} \equiv \{\underline{matricola} \text{, nome, cognome, via, numero_civico, cap, tipo, area_disciplinare, email, corso, anno_iscrizione}\}
 $$
 
-#### Supporto
 
-L'entità `Supporto` presenta un identificatore interno per cui viene tradotta in una relazione avente lo stesso nome, ma al plurale, gli stessi attributi e come chiave primaria l'identificatore dell'entità.
-$$
-\text{supporti} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \}
-$$
-
----
 
 ### Traduzione delle associazioni
 
@@ -352,15 +360,7 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
-#### Memoria
 
-L'associazione `Memoria` è un'associazione molti a molti, che si traduce in una relazione che avrà lo stesso nome dell'associazione.
-Visto che l'associazione non presenta attributi propri, vengono aggiunti gli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna. Inoltre gli identificatori della relazione dal lato uno faranno anche da chiave primaria della relazione.
-$$
-\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{,} \underline{ titolo} \text{,} \underline{ anno}\}
-$$
-
----
 
 ### Schema del database
 
@@ -385,19 +385,11 @@ $$
 $$
 
 $$
-\text{supporti} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \}
-$$
-
-$$
 \text{incisioni} \equiv \{\underline{artista} \text{, } \underline{titolo} \text{, } \underline{anno}\}
 $$
 
 $$
 \text{partecipazioni} \equiv \{\underline{partecipante} \text{, } \underline{audizione} \text{, gradimento, commento}\}
-$$
-
-$$
-\text{memorie} \equiv \{\underline{tipo} \text{, } \underline{dimensione} \text{,} \underline{ titolo} \text{,} \underline{ anno}\}
 $$
 
 ---
@@ -479,21 +471,7 @@ $$
 | gradimento     | varchar(10)   |             |                        |
 | commento       | varchar(1000) |             |                        |
 
-#### Supporti
-
-| Nome attributo | Tipo        |             | Vincoli |
-| -------------- | ----------- | ----------- | ------- |
-| tipo           | varchar(10) | primary key |         |
-| dimensione     | integer     | primary key |         |
-
-#### Memorie
-
-| Nome attributo | Tipo        |             | Vincoli             |
-| -------------- | ----------- | ----------- | ------------------- |
-| tipo           | varchar(10) | primary key | supporti.tipo       |
-| dimensione     | integer     | primary key | supporti.dimensione |
-| titolo         | varchar(30) | primary key | album.titolo        |
-| anno           | integer     | primary key | album.anno          |
+#### 
 
 [studente]: img/Studente.png
 [album]: img/Album.png
@@ -510,3 +488,5 @@ $$
 [universitario-bis]: img/Universitario-bis.png
 [universitario-tris]: img/Universitario-tris.png
 [supporto]: img/Supporto.png
+[richiesta]: img/Richiesta.png
+
