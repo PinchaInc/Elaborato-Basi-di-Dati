@@ -291,7 +291,7 @@ $$
 
 L'entità `Album` presenta un identificatore interno per cui viene tradotta in una relazione avete lo stesso nome, gli stessi attributi e come chiave primaria gli identificatori dell'entità.
 $$
-\text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere}\}
+\text{album} \equiv \{\underline{titolo} \text{, } \underline{anno} \text{, genere, supporto}\}
 $$
 
 #### Etichetta
@@ -358,7 +358,16 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
+#### Richiesta
 
+L'associazione `Richiesta` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione. Come lista degli attributi solo gli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna, in quanto non presenta attributi propri.
+Inoltre gli identificatori esterni faranno anche da chiave primaria della relazione.
+$$
+\text{richieste} \equiv \{\underline{richiedente} \text{, } \underline{audizione}\}
+$$
+dove:
+- `richiedente` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
+- `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
 ### Schema del database
 
@@ -390,84 +399,204 @@ $$
 \text{partecipazioni} \equiv \{\underline{partecipante} \text{, } \underline{audizione} \text{, gradimento, commento}\}
 $$
 
+$$
+\text{richieste} \equiv \{\underline{richiedente} \text{, } \underline{audizione}\}
+$$
+
 ---
 
 ### Tabelle di relazione
 
 #### Artisti
 
-| Nome attributo | Tipo        |             | Vincoli |
-| -------------- | ----        | ----        | ------- |
-| nome_arte      | varchar(30) | primary key |         |
-| nome           | varchar(20) | not null    |         |
-| cognome        | varchar(20) | not null    |         |
-| data_nascita   | date        | not null    |         |
+| Nome attributo | Tipo        | Primo/Not null/Univocità | Vincoli |
+| -------------- | ----------- | ------------------------ | ------- |
+| nome_arte      | varchar(30) | primary key              |         |
+| nome           | varchar(20) | not null                 |         |
+| cognome        | varchar(20) | not null                 |         |
+| data_nascita   | date        | not null                 |         |
 
 #### Album
 
-| Nome attributo | Tipo        |             | Vincoli        |
-| -------------- | ----------- | ----------- | -------------- |
-| titolo         | varchar(30) | primary key |                |
-| anno           | integer     | primary key |                |
-| genere         | varchar(10) | not null    |                |
-| etichetta      | varchar(25) | not null    | etichette.nome |
+| Nome attributo | Tipo        | Primo/Not null/Univocità | Vincoli        |
+| -------------- | ----------- | ------------------------ | -------------- |
+| titolo         | varchar(30) | primary key              |                |
+| anno           | integer     | primary key              |                |
+| genere         | varchar(8)  | not null                 |                |
+| supporto       | varchar(8)  | not null                 |                |
+| etichetta      | varchar(25) | not null                 | etichette.nome |
 
 #### Etichette
 
-| Nome attributo | Tipo        |                   | Vincoli |
-| -------------- | ----        | ----              | ------- |
-| nome           | varchar(25) | primary key       |         |
-| telefono       | varchar(15) | not null - unique |         |
-| via            | varchar(25) | not null          |         |
-| numero_civico  | integer     | not null          |         |
-| cap            | integer     | not null          |         |
+| Nome attributo | Tipo        | Primo/Not null/Univocità | Vincoli |
+| -------------- | ----------- | ------------------------ | ------- |
+| nome           | varchar(25) | primary key              |         |
+| telefono       | varchar(15) | not null - unique        |         |
+| via            | varchar(25) | not null                 |         |
+| numero_civico  | integer     | not null                 |         |
+| cap            | integer     | not null                 |         |
 
 ---
 
 #### Audizioni
 
-| Nome attributo | Tipo        |             | Vincoli      |
-| -------------- | ----------- | ----------- | ------------ |
-| id             | integer     | primary key |              |
-| data           | date        | not null    |              |
-| ora            | ?           | not null    |              |
-| titolo         | varchar(30) | not null    | album.titolo |
-| anno           | integer     | not null    | album.anno   |
+| Nome attributo | Tipo        | Primo/Not null/Univocità | Vincoli      |
+| -------------- | ----------- | ------------------------ | ------------ |
+| id             | integer     | primary key              |              |
+| data           | date        | not null                 |              |
+| ora            | text        | not null                 |              |
+| titolo         | varchar(30) | not null                 | album.titolo |
+| anno           | integer     | not null                 | album.anno   |
 
 #### Universitari
 
-| Nome attributo    | Tipo        |             | Vincoli |
-| ----------------- | ----------- | ----------- | ------- |
-| matricola         | integer     | primary key |         |
-| nome              | varchar(20) | not null    |         |
-| cognome           | varchar(20) | not null    |         |
-| via               | varchar(25) | not null    |         |
-| numero_civico     | integer     | not null    |         |
-| cap               | integer     | not null    |         |
-| tipo              | varchar(10) | not null    |         |
-| area_disciplinare | varchar(30) |             |         |
-| email             | varchar(50) |             |         |
-| anno_iscrizione   | integer     |             |         |
-| corso             | varchar(30) |             |         |
+| Nome attributo    | Tipo        | Primo/Not null/Univocità | Vincoli |
+| ----------------- | ----------- | ------------------------ | ------- |
+| matricola         | integer     | primary key              |         |
+| nome              | varchar(20) | not null                 |         |
+| cognome           | varchar(20) | not null                 |         |
+| via               | varchar(25) | not null                 |         |
+| numero_civico     | integer     | not null                 |         |
+| cap               | integer     | not null                 |         |
+| tipo              | varchar(8)  | not null                 |         |
+| area_disciplinare | varchar(30) |                          |         |
+| email             | varchar(50) |                          |         |
+| anno_iscrizione   | integer     |                          |         |
+| corso             | varchar(30) |                          |         |
 
 #### Incisioni
 
-| Nome attributo | Tipo        |          | Vincoli             |
-| -------------- | ----------- | -------- | ------------------- |
-| artista        | varchar(30) | not null | artisti.nome_d'arte |
-| titolo         | varchar(30) | not null | album.titolo        |
-| anno           | integer     | not null | album.anno          |
+| Nome attributo | Tipo        | Primo/Not null/Univocità | Vincoli             |
+| -------------- | ----------- | ------------------------ | ------------------- |
+| artista        | varchar(30) | not null                 | artisti.nome_d'arte |
+| titolo         | varchar(30) | not null                 | album.titolo        |
+| anno           | integer     | not null                 | album.anno          |
 
 ---
 
 #### Partecipazioni
 
-| Nome attributo | Tipo          |             | Vincoli                |
-| -------------- | ------------- | ----------- | ---------------------- |
-| partecipante   | integer       | primary key | universitari.matricola |
-| audizione      | integer       | primary key | audizioni.id           |
-| gradimento     | varchar(10)   |             |                        |
-| commento       | varchar(1000) |             |                        |
+| Nome attributo | Tipo          | Primo/Not null/Univocità | Vincoli                |
+| -------------- | ------------- | ------------------------ | ---------------------- |
+| partecipante   | integer       | primary key              | universitari.matricola |
+| audizione      | integer       | primary key              | audizioni.id           |
+| gradimento     | varchar(7)    |                          |                        |
+| commento       | varchar(1000) |                          |                        |
+
+#### Richieste
+
+| Nome attributo | Tipo          | Primo/Not null/Univocità | Vincoli                |
+| -------------- | ------------- | ------------------------ | ---------------------- |
+| richiedente   | integer       | primary key              | universitari.matricola |
+| audizione      | integer       | primary key              | audizioni.id           |
+
+## Progettazione fisica
+
+Per la realizzazione del nostro database abbiamo scelto di utilizzate SQLite.
+
+### Creazione delle tabelle
+
+#### Album
+
+```sql lite
+create table album (
+titolo varchar(30) not null,
+anno integer not null,
+genere varchar(8) default 'altro' check ( genere in ('rock', 'pop', 'dance', 'classica', 'bluse', 'jazz', 'indie', 'altro')) not null,
+supporto varchar(8) not null check(supporto in ("cd", "vinile", "entrambi")),
+etichetta varchar(25) not null references etichette (nome),
+PRIMARY KEY (titolo, anno)
+)
+```
+
+#### Artisti
+
+```sql lite
+create table artisti (
+nome_arte varchar(30) not null primary key,
+nome varchar(20) not null,
+cognome varchar(20) not null,
+data_nascita date not null
+)
+```
+
+#### Audizioni
+
+```sql lite
+create table audizioni(
+id integer not null primary key,
+data date not null,
+ora text not null,
+titolo varchar(30) not null references album(titolo),
+anno integer not null references album(anno)
+)
+```
+
+####Etichette
+
+```sql lite
+create table etichette (
+nome varchar(25) not null primary key,
+telefono varchar(15) not null unique,
+via varchar(25) not null,
+numero_civico integer not null,
+cap integer not null
+)
+```
+
+#### Incisioni
+
+```sql lite
+create table incisioni(
+artista varchar(30) not null references artisti(nome_arte),
+titolo varchar(30) not null references album(titolo),
+anno integer not null references album(anno),
+PRIMARY KEY (artista, titolo, anno)
+)
+```
+
+#### Partecipazioni
+
+```sql lite
+create table partecipazioni(
+partecipante integer not null references universitari(matricola),
+audizione integer not null references audizioni(id),
+gradimento varchar(7) check(gradimento in ("alto", "normale", "basso")),
+commento varchar(1000),
+PRIMARY KEY(partecipante, audizione)
+)
+```
+
+#### Richieste
+
+```sql lite
+create table richieste(
+richiedente integer not null references universitari(matricola),
+audizione integer not null references audizioni(id),
+PRIMARY KEY(richiedente, audizione)
+)
+```
+
+#### Universitari
+
+```sql lite
+create table universitari(
+matricola integer not null primary key,
+nome varchar(20) not null, 
+cognome varchar(20) not null,
+via varchar(25) not null,
+numero_civico integer not null,
+cap integer not null,
+tipo varchar(8) not null check(tipo in ("studente", "docente")),
+area_disciplinare varchar(30),
+email varchar(50),
+anno_iscrizione integer,
+corso varchar(30)
+)
+```
+
+
+
 
 
 [studente]: img/Studente.png
