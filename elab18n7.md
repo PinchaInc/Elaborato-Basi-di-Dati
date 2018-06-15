@@ -500,99 +500,102 @@ Per la realizzazione del nostro database abbiamo scelto di utilizzate SQLite.
 
 ```sql lite
 create table album (
-titolo varchar(30) not null,
-anno integer not null,
-genere varchar(8) default 'altro' check ( genere in ('rock', 'pop', 'dance', 'classica', 'bluse', 'jazz', 'indie', 'altro')) not null,
-supporto varchar(8) not null check(supporto in ("cd", "vinile", "entrambi")),
-etichetta varchar(25) not null references etichette (nome),
-PRIMARY KEY (titolo, anno)
-)
+  titolo varchar(30) not null,
+  anno integer not null,
+  genere varchar(8) default 'altro' check ( genere in ('rock', 'pop', 'dance', 'classica', 'bluse', 'jazz', 'indie', 'altro')) not null,
+  supporto varchar(8) not null check(supporto in ("cd", "vinile", "entrambi")),
+  etichetta varchar(25) not null references etichette (nome),
+  primary key (titolo, anno)
+);
 ```
 
 #### Artisti
 
 ```sql lite
 create table artisti (
-nome_arte varchar(30) not null primary key,
-nome varchar(20) not null,
-cognome varchar(20) not null,
-data_nascita date not null
-)
+  nome_arte varchar(30) not null primary key,
+  nome varchar(20) not null,
+  cognome varchar(20) not null,
+  data_nascita date not null
+);
 ```
 
 #### Audizioni
 
 ```sql lite
 create table audizioni(
-id integer not null primary key,
-data date not null,
-ora text not null,
-titolo varchar(30) not null references album(titolo),
-anno integer not null references album(anno)
-)
+  id integer not null primary key,
+  data date not null,
+  ora text not null,
+  titolo varchar(30) not null,
+  anno integer not null,
+  foreign key (titolo, anno) references album(titolo, anno)
+);
 ```
 
 ####Etichette
 
 ```sql lite
 create table etichette (
-nome varchar(25) not null primary key,
-telefono varchar(15) not null unique,
-via varchar(25) not null,
-numero_civico integer not null,
-cap integer not null
-)
+  nome varchar(25) not null primary key,
+  telefono varchar(15) not null unique,
+  via varchar(25) not null,
+  numero_civico integer not null,
+  cap integer not null
+);
 ```
 
 #### Incisioni
 
 ```sql lite
 create table incisioni(
-artista varchar(30) not null references artisti(nome_arte),
-titolo varchar(30) not null references album(titolo),
-anno integer not null references album(anno),
-PRIMARY KEY (artista, titolo, anno)
-)
+  artista varchar(30) not null,
+  titolo varchar(30) not null,
+  anno integer not null,
+  foreign key (titolo, anno) references album (titolo, anno),
+  foreign key (artista) references artisti (nome_arte),
+  primary key (artista, titolo, anno)
+);
 ```
 
 #### Partecipazioni
 
 ```sql lite
 create table partecipazioni(
-partecipante integer not null references universitari(matricola),
-audizione integer not null references audizioni(id),
-gradimento varchar(7) check(gradimento in ("alto", "normale", "basso")),
-commento varchar(1000),
-PRIMARY KEY(partecipante, audizione)
-)
+  partecipante integer not null references universitari(matricola),
+  audizione integer not null references audizioni(id),
+  gradimento varchar(7) check(gradimento in ("alto", "normale", "basso")),
+  commento varchar(1000),
+  primary key(partecipante, audizione)
+);
 ```
 
 #### Richieste
 
 ```sql lite
 create table richieste(
-richiedente integer not null references universitari(matricola),
-audizione integer not null references audizioni(id),
-PRIMARY KEY(richiedente, audizione)
-)
+  richiedente integer not null references universitari(matricola),
+  audizione integer not null references audizioni(id),
+  primary key(richiedente, audizione)
+);
 ```
 
 #### Universitari
 
 ```sql lite
 create table universitari(
-matricola integer not null primary key,
-nome varchar(20) not null, 
-cognome varchar(20) not null,
-via varchar(25) not null,
-numero_civico integer not null,
-cap integer not null,
-tipo varchar(8) not null check(tipo in ("studente", "docente")),
-area_disciplinare varchar(30),
-email varchar(50),
-anno_iscrizione integer,
-corso varchar(30)
-)
+  matricola integer not null primary key,
+  nome varchar(20) not null, 
+  cognome varchar(20) not null,
+  via varchar(25) not null,
+  numero_civico integer not null,
+  cap integer not null,
+  tipo varchar(8) not null check(tipo in ("studente", "docente")),
+  area_disciplinare varchar(30),
+  email varchar(50),
+  anno_iscrizione integer,
+  corso varchar(30)
+);
 ```
 
 
