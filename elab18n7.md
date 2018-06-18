@@ -74,16 +74,65 @@ Tutti i campi sono obbligatori.
 
 ---
 
+##### Studente
+
+> gli interessati(docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
+
+L'entità `Studente` è composta dagli attributi `nome`, `cognome`, `matricola`, `indirizzo`, `anno di iscrizione` e `corso`.
+Per gli attributi `nome` e `cognome` sono stati destinati 20 caratteri.
+L'attributo `matricola ` è un intero che viene utilizzato anche come identificatore.
+L'attributo `indirizzo` è invece un attributo composto, formato a sua volta dagli attributi `via`, `numero civico` e `cap`.
+L'attributo `anno di iscrizione` è un intero, mentre per l'attributo `corso` sono stati preposti 30 caratteri.
+Tutti gli attributi sono obbligatori. 
+
+###### Studente
+
+| Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
+| ------------------ | ------------------------------------------------------------ | --------------------------------------- | ---- |
+| matricola          | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
+| nome               | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
+| cognome            | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
+| indirizzo          | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
+| anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
+| corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
+
+##### Docente
+
+> gli interessati(docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
+
+L'entità `Docente` è composta dagli attributi `nome`, `cognome`, `matricola`, `indirizzo`, `area disciplinare` e `email`.
+Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri.
+L'attributo `matricola` è un intero, utilizzato anche come identificatore.
+L'attributo `indirizzo` è un attributo composto, formato dagli attributi `via`, `numero civico` e `cap`.
+Per l'attributo `area disciplinare` si hanno a disposizione 30 caratteri, mentre all'attributo `email` sono stati destinati 20 caratteri.
+Tutti gli attributi sono obbligatori.
+
+###### Docente
+
+| Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
+| ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
+| matricola         | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
+| nome              | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
+| cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
+| indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
+| area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
+| email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
+
+---
+
 ##### Universitario
 
 > gli interessati(docenti o studenti) individuati da una matricola Nome, Cognome e Indirizzo. Nel caso degli studenti si riporta anche il corso a cui sono iscritti e l'anno di iscrizione; nel caso dei docenti si riporta l'area disciplinare di insegnamento e la email interna.
 
-L'entità `Universitario` è composta dal `nome`, dal `cognome`, dall'`indirizzo` e dalla `matricola`. Quest'ultima vine usata come identificatore.
-Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri. Mentre l'attributo `indirizzo` è un attributo composto dall'attributo `via`, il `numero civico` e il `cap`.
-L'entità `Universitario` viene a suo volta specializzata in due sotto-entità; il `Docente` e lo `Sudente`.
-Nel caso di un studente vengono aggiunti anche gli attributi `anno di iscrizione` e il `corso` a cui sono iscritti. Per quest'ultimo attributo sono stati preposti 30 caratteri.
-Nel caso di un docente vengono aggiunti anche gli attributi `area disciplinare` e `email` per l'email interna all'istituto. Per questi due attributi sono stati preposti rispettivamente 30 e 50 caratteri.
+Dato che le entità `Studente` e `Docente` hanno diversi attributi in comune, possono essere generalizzate in una singola entità, definita come `Universitario`.
 In base al dominio applicativo possiamo asserire che si tratti di una generalizzazione totale ed esclusiva, in quanto nel dominio del problema non esistono altri interessati oltre ai docenti e agli studenti e uno studente non può essere anche un docente o viceversa.
+L'entità `Universitario` è composta dal `nome`, dal `cognome`, dall'`indirizzo` e dalla `matricola`, ovvero dagli attributi in comune tra `Studente` e `Docente`. 
+Per gli attributi `nome` e `cognome` sono stati preposti 20 caratteri. 
+L'attributo `matricola` è un intero che viene utilizzato anche come identificatore.
+L'attributo `indirizzo` è un attributo composto dagli attributi `via`, `numero civico` e `cap`.
+L'entità `Universitario` viene quindi specializzata in due sotto-entità: il `Docente` e lo `Studente`. Queste entità saranno formate soltanto dai propri attributi specifici.
+Nel caso di uno studente, infatti,  vengono aggiunti gli attributi `anno di iscrizione` e il `corso` a cui sono iscritti. Per quest'ultimo attributo sono stati preposti 30 caratteri.
+Nel caso di un docente vengono invece aggiunti gli attributi `area disciplinare` e `email` per l'email interna all'istituto. Per questi due attributi sono stati preposti rispettivamente 30 e 50 caratteri.
 Tutti i campi sono obbligatori.
 
 ![universitario][]
@@ -101,19 +150,19 @@ Tutti i campi sono obbligatori.
 
 ###### Studente
 
-| Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
-| -----------------  | ------------------------------------------------------------ | --------------------------------------- | ---- |
-| anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
-| corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
+| Nome attributo     | Descrizione                             | Tipo                                    | ID   |
+| ------------------ | --------------------------------------- | --------------------------------------- | ---- |
+| anno di iscrizione | L'anno in cui lo studente si è iscritto | intero                                  | no   |
+| corso              | Il corso a cui lo studente è iscitto    | stringa<br />variabile<br />max 30 char | no   |
 
-###### Docente
+ ###### Docente
 
-| Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
-| ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
-| area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
-| email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
+| Nome attributo    | Descrizione                        | Tipo                                    | ID   |
+| ----------------- | ---------------------------------- | --------------------------------------- | ---- |
+| area disciplinare | L'area di insegnamento del docente | stringa<br />variabile<br />max 30 char | no   |
+| email             | L'email interna all'istituto       | stringa<br />variabile<br />max 50 char | no   |
 
----
+
 
 ##### Audizione
 
