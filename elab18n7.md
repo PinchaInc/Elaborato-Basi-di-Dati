@@ -90,8 +90,8 @@ Tutti gli attributi sono obbligatori.
 | Nome attributo     | Descrizione                                                  | Tipo                                    | ID   |
 | ------------------ | ------------------------------------------------------------ | --------------------------------------- | ---- |
 | matricola          | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
-| nome               | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
-| cognome            | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
+| nome               | Nome dello studente                                          | stringa<br />variabile<br />max 20 char | no   |
+| cognome            | Cognome dello studente                                       | stringa<br />variabile<br />max 20 char | no   |
 | indirizzo          | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
 | anno di iscrizione | L'anno in cui lo studente si è iscritto                      | intero                                  | no   |
 | corso              | Il corso a cui lo studente è iscitto                         | stringa<br />variabile<br />max 30 char | no   |
@@ -112,8 +112,8 @@ Tutti gli attributi sono obbligatori.
 | Nome attributo    | Descrizione                                                  | Tipo                                    | ID   |
 | ----------------- | ------------------------------------------------------------ | --------------------------------------- | ---- |
 | matricola         | Codice identificativo all'interno dell'organizzazione        | intero                                  | si   |
-| nome              | Nome del                                                     | stringa<br />variabile<br />max 20 char | no   |
-| cognome           | Cognome del                                                  | stringa<br />variabile<br />max 20 char | no   |
+| nome              | Nome del docente                                             | stringa<br />variabile<br />max 20 char | no   |
+| cognome           | Cognome del docente                                          | stringa<br />variabile<br />max 20 char | no   |
 | indirizzo         | L'indirizzo di residenza del. L'indirizzo è composto da tre sotto campi; via, n.ro civico e cap | composto                                | no   |
 | area disciplinare | L'area di insegnamento del docente                           | stringa<br />variabile<br />max 30 char | no   |
 | email             | L'email interna all'istituto                                 | stringa<br />variabile<br />max 50 char | no   |
@@ -163,6 +163,8 @@ Tutti i campi sono obbligatori.
 | email             | L'email interna all'istituto       | stringa<br />variabile<br />max 50 char | no   |
 
 
+
+---
 
 ##### Audizione
 
@@ -317,6 +319,8 @@ Allo stesso modo l'entità `Universitario` diventa:
 
 ![universitario-bis][]
 
+---
+
 #### Trasformazione della generalizzazione
 
 Durante la progettazione concettuale le entità `Studente` e `Docente` sono state generalizzate nell'entità `Universitario`, ma per poter passare alla progettazione logica incontriamo la necessita di eliminare la generalizzazione.
@@ -366,6 +370,8 @@ $$
 
 
 
+---
+
 ### Traduzione delle associazioni
 
 #### Incisione
@@ -407,6 +413,8 @@ dove:
 - `partecipante` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
 
+---
+
 #### Richiesta
 
 L'associazione `Richiesta` è un'associazione molti a molti, per cui si traduce in una relazione che avrà lo stesso nome dell'associazione. Come lista degli attributi solo gli identificatori delle entità associate, con annotazione dell'ovvio vincolo di referenza esterna, in quanto non presenta attributi propri.
@@ -417,6 +425,8 @@ $$
 dove:
 - `richiedente` presenta un vincolo di referenza esterna a `matricola` nella relazione `universitari`
 - `audizione` presenta un vincolo di referenza esterna a `id` della relazione `audizione`
+
+---
 
 ### Schema del database
 
@@ -539,6 +549,8 @@ $$
 | richiedente   | integer       | primary key              | universitari.matricola |
 | audizione      | integer       | primary key              | audizioni.id           |
 
+---
+
 ## Progettazione fisica
 
 Per la realizzazione del nostro database abbiamo scelto di utilizzate SQLite.
@@ -632,6 +644,8 @@ create table richieste(
   primary key(richiedente, audizione)
 );
 ```
+
+---
 
 #### Universitari
 
