@@ -494,6 +494,10 @@ $$
 
 Per la realizzazione del nostro database abbiamo scelto di utilizzate SQLite.
 
+Per le operazioni di **delete**, ovvero la cancellazione di tuple all'interno di una tabella, abbiamo optato per l'utilizzo dell'opzione **no action**, la quale non permette la cancellazione di una tupla se questa contiene degli attributi riferiti in altre relazioni. In questo modo, possiamo evitare la cancellazione erronea di tuple, che porterebbero ad un database incompleto. 
+
+Per le operazioni di **update**, che permettono l'aggiornamento dei valori in una tupla, abbiamo scelto di usare l'opzione **cascade**, che propaga l'aggiornamento anche agli attributi che si riferiscono alla tupla modificata. Così facendo, è sufficiente aggiornare solo una volta il valore di un attributo, senza dover modificare singolarmente ogni tupla.
+
 ### Creazione delle tabelle
 
 #### Album
@@ -504,7 +508,7 @@ create table album (
   anno integer not null,
   genere varchar(8) default 'altro' check ( genere in ('rock', 'pop', 'dance', 'classica', 'bluse', 'jazz', 'indie', 'altro')) not null,
   supporto varchar(8) not null check(supporto in ("cd", "vinile", "entrambi")),
-  etichetta varchar(25) not null references etichette (nome),
+  etichetta varchar(25) not null references etichette (nome) on update cascade,
   primary key (titolo, anno)
 );
 ```
@@ -529,7 +533,7 @@ create table audizioni(
   ora text not null,
   titolo varchar(30) not null,
   anno integer not null,
-  foreign key (titolo, anno) references album(titolo, anno)
+  foreign key (titolo, anno) references album(titolo, anno) on update cascade
 );
 ```
 
@@ -552,8 +556,8 @@ create table incisioni(
   artista varchar(30) not null,
   titolo varchar(30) not null,
   anno integer not null,
-  foreign key (titolo, anno) references album (titolo, anno),
-  foreign key (artista) references artisti (nome_arte),
+  foreign key (titolo, anno) references album (titolo, anno) on update cascade,
+  foreign key (artista) references artisti (nome_arte) on update cascade,
   primary key (artista, titolo, anno)
 );
 ```
@@ -562,8 +566,8 @@ create table incisioni(
 
 ```sql lite
 create table partecipazioni(
-  partecipante integer not null references universitari(matricola),
-  audizione integer not null references audizioni(id),
+  partecipante integer not null references universitari(matricola) on update cascade,
+  audizione integer not null references audizioni(id) on update cascade,
   gradimento varchar(7) check(gradimento in ("alto", "normale", "basso")),
   commento varchar(1000),
   primary key(partecipante, audizione)
@@ -574,8 +578,8 @@ create table partecipazioni(
 
 ```sql lite
 create table richieste(
-  richiedente integer not null references universitari(matricola),
-  audizione integer not null references audizioni(id),
+  richiedente integer not null references universitari(matricola) on update cascade,
+  audizione integer not null references audizioni(id) on update cascade,
   primary key(richiedente, audizione)
 );
 ```
