@@ -664,10 +664,127 @@ create table universitari(
   corso varchar(30)
 );
 ```
+### Interrogazioni al database
 
+#### Query 0
 
+Si desiderano conoscere tutte le incisioni
+```sql lite
+select *
+  from incisioni
+```
 
+#### Query 1
 
+Si desidera conoscere l'elenco di tutte le etichette, riportando il nome dell'etichetta e il rispettivo numero di telefono.
+```sql lite
+select nome, telefono
+  from etichette;
+```
+
+#### Query 2
+
+Si desidera conoscere tutti gli album pubblicati dell'etichetta *Bomba Dischi*.
+```sql lite
+select *
+  from album
+  where etichetta like "Bomba Dischi";
+```
+
+#### Query 3
+
+Si desidera conoscere la matricola, il nome e il cognome de tutti gli studenti.
+```sql lite
+select matricola, nome, cognome
+  from universitari
+  where tipo  like "studente";
+```
+
+#### Query 4
+
+Si desidera conoscere l'elenco di tutti gli album che sono stati pubblicati solo su cd.
+```sql lite
+select *
+  from album
+  where supporto = "cd" and  supporto <> "entrambi";
+```
+
+#### Query 5
+
+Come la query 5, ma in questo caso gli album devono essere ordinati in base all'anno, dal meno recente al più recente. Nel caso in cui più album siano stati pubblicati lo stesso anno si segue l'ordine alfabetico.
+```sql lite
+select *
+  from album
+  where supporto = "cd" and supporto <> "entrambi"
+  order by anno, titolo;
+```
+
+#### Query 6
+
+Si desidera conoscere la matricola, il nome e il cognome di tutti gli universitari che hanno richiesto almeno un'audizione.
+```sql lite
+select distinct matricola, nome, cognome
+  from universitari, richieste
+  where matricola = richiedente;
+```
+
+#### Query 7
+
+La stessa query di sopra ma usando il join.
+```sql lite
+select distinct matricola, nome, cognome
+  from universitari join richieste
+    on universitari.matricola = richieste.richiedente;
+```
+
+#### Query 8
+
+Si desidera conoscere il numero di album pubblicato da ogni etichetta. L'elenco deve essere ordinato dall'etichetta che ha pubblicato più album a quella che ne ha pubblicati di meno. In caso di due etichette che abbiano pubblicato lo stesso numero di album conta l'ordine alfabetico.
+Inoltre è richiesta la rinominazione della colona contenete in numero di album pubblicati.
+```sql lite
+select etichetta, count(etichetta) as album_pubblicati
+  from album
+  group by etichetta
+  order by count(etichetta) desc, etichetta;
+```
+
+#### Query 9
+
+Si desidera conoscere tutti gli artisti che non hanno ancora inciso alcun album.
+```sql lite
+select *
+  from artisti
+  where nome_arte not in (
+    select artista
+    from incisioni
+);
+```
+
+#### Query 10
+
+Si desidera conoscere tutto delle etichette che ancora non hanno pubblicato alcun album.
+```sql lite
+select *
+from etichette
+where etichette.nome not in (
+  select distinct album.etichetta
+  from album
+);
+```
+
+#### Query 11
+
+Si desidera conoscere l'elenco degli album pubblicati da più artisti.
+```sql lite
+select album.titolo, album.anno, genere, supporto, etichetta
+  from album join (
+    select *
+    from incisioni
+    group by incisioni.titolo, incisioni.anno
+    having count(*) > 1
+    ) as i_mul
+      on i_mul.titolo = album.titolo and i_mul.anno = album.anno;
+```
 
 [studente]: img/Studente.png
 [album]: img/Album.png
