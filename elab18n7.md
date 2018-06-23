@@ -668,7 +668,7 @@ create table universitari(
 
 #### Query 0
 
-Si desiderano conoscere tutte le incisioni
+Si desiderano conoscere tutte le incisioni.
 ```sql lite
 select *
   from incisioni
@@ -702,20 +702,20 @@ select matricola, nome, cognome
 
 #### Query 4
 
-Si desidera conoscere l'elenco di tutti gli album che sono stati pubblicati solo su cd.
+Si desidera conoscere l'elenco di tutti gli album che sono stati pubblicati su cd.
 ```sql lite
 select *
   from album
-  where supporto = "cd" and  supporto <> "entrambi";
+  where supporto = "cd" or supporto = "entrambi";
 ```
 
 #### Query 5
 
-Come la query 5, ma in questo caso gli album devono essere ordinati in base all'anno, dal meno recente al più recente. Nel caso in cui più album siano stati pubblicati lo stesso anno si segue l'ordine alfabetico.
+Come la query 4, ma in questo caso gli album devono essere ordinati in base all'anno, dal meno recente al più recente. Nel caso in cui più album siano stati pubblicati lo stesso anno si segue l'ordine alfabetico.
 ```sql lite
 select *
   from album
-  where supporto = "cd" and supporto <> "entrambi"
+  where supporto = "cd" or supporto = "entrambi"
   order by anno, titolo;
 ```
 
@@ -730,7 +730,7 @@ select distinct matricola, nome, cognome
 
 #### Query 7
 
-La stessa query di sopra ma usando il join.
+La stessa query di sopra ma usando l'operatore join.
 ```sql lite
 select distinct matricola, nome, cognome
   from universitari join richieste
@@ -739,8 +739,8 @@ select distinct matricola, nome, cognome
 
 #### Query 8
 
-Si desidera conoscere il numero di album pubblicato da ogni etichetta. L'elenco deve essere ordinato dall'etichetta che ha pubblicato più album a quella che ne ha pubblicati di meno. In caso di due etichette che abbiano pubblicato lo stesso numero di album conta l'ordine alfabetico.
-Inoltre è richiesta la rinominazione della colona contenete in numero di album pubblicati.
+Si desidera conoscere il numero di album pubblicato da ogni etichetta. L'elenco deve essere ordinato dall'etichetta che ha pubblicato più album a quella che ne ha pubblicati di meno. In caso che due etichette abbiano pubblicato lo stesso numero di album conta l'ordine alfabetico.
+Inoltre è richiesta la rinominazione della colonna contenente il numero di album pubblicati.
 ```sql lite
 select etichetta, count(etichetta) as album_pubblicati
   from album
