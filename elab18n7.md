@@ -786,6 +786,22 @@ select album.titolo, album.anno, genere, supporto, etichetta
       on i_mul.titolo = album.titolo and i_mul.anno = album.anno;
 ```
 
+#### Query 12
+
+Si desidera conoscere il titolo degli album di genere "indie" e il corrispondente nome dell'artista.
+
+```sql lite
+select titolo, artista
+	from incisioni
+	where titolo in (
+    	select titolo
+    	from album
+    	where genere like "indie"
+    );
+```
+
+ 
+
 [studente]: img/Studente.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
