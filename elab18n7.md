@@ -1,6 +1,21 @@
-# ELAB18N7 Collezione di Dischi
+# <center>Elaborato basi di dati</center>
 
-Uno istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
+## <center>Seduta d'esame 10/07/18</center>
+
+![logo][]
+
+### <center>Gruppo di lavoro 7-Quaramimi</center>
+
+| Nome               | Matricola |
+| ------------------ | --------- |
+| Mignone Raffaele   | 863/747   |
+| Mincolelli Noemi   | 863/701   |
+| Quarantiello Luigi | 863/953   |
+___
+
+## elab18n7
+
+Un istituto di formazione musicale vuole creare una base di dati per la propria collezione di album di dischi. Nella base di dati devono essere presenti informazioni relative agli <font color="red">artisti</font>: <font color="green">nome, cognome, data di nascita, nome d'arte. </font><font color="blue">Ogni artista può aver inciso più album, ed un album può essere stato inciso da più artisti</font>. Di ogni <font color="red">album</font> si vuole sapere il <font color="green">titolo, l'anno di pubblicazione ed il genere</font> (da scegliere tra: rock, pop, dance, classica, blues, jazz, ...altro). Inoltre è necessario sapere se <font color="green">il supporto</font> dove il disco è memorizzato è un compact disc o un vinile, ovviamente un disco può essere disponibile per entrambi i supporti. <font color="blue">Ogni album viene pubblicato da una sola etichetta</font>.
 <font color="red">Un'etichetta</font> può pubblicare più album. Di ogni etichetta si deve indicare il <font color="green">nome, l'indirizzo e il numero di telefono</font>.
 <font color="blue">L'istituto organizza su richiesta, sedute di audizione di un album</font> da parte degli <font color="red">interessati</font> (<font color="red">docenti</font> o <font color="red">studenti</font>) individuati da una <font color="green">matricola Nome, Cognome e Indirizzo</font>. Nel caso degli studenti si riporta anche il <font color="green">corso a cui sono iscritti e l'anno di iscrizione</font>; nel caso dei docenti si riporta <font color="green">l'area disciplinare di insegnamento e la email interna</font>. Per ogni <font color="red">audizione</font> si conserva un <font color="green">numero progressivo di identificazione, data ed ora dell'audizione</font>. <font color="blue">Ad ogni audizione, un docente o uno studente possono compilare un giudizio, di cui si riportano un</font> <font color="green">commento generale</font> (1000 caratteri), <font color="green">il livello di gradimento</font> (alto, normale, basso).
 
@@ -664,6 +679,8 @@ create table universitari(
   corso varchar(30)
 );
 ```
+---
+
 ### Interrogazioni al database
 
 #### Query 0
@@ -709,6 +726,8 @@ select *
   where supporto = "cd" or supporto = "entrambi";
 ```
 
+---
+
 #### Query 5
 
 Come la query 4, ma in questo caso gli album devono essere ordinati in base all'anno, dal meno recente al più recente. Nel caso in cui più album siano stati pubblicati lo stesso anno si segue l'ordine alfabetico.
@@ -748,6 +767,8 @@ select etichetta, count(etichetta) as album_pubblicati
   order by count(etichetta) desc, etichetta;
 ```
 
+---
+
 #### Query 9
 
 Si desidera conoscere tutti gli artisti che non hanno ancora inciso alcun album.
@@ -778,7 +799,7 @@ Si desidera conoscere l'elenco degli album pubblicati da più artisti.
 ```sql lite
 select album.titolo, album.anno, genere, supporto, etichetta
   from album join (
-    select *
+    select titolo, anno
     from incisioni
     group by incisioni.titolo, incisioni.anno
     having count(*) > 1
@@ -803,6 +824,7 @@ select titolo, artista
  
 
 [studente]: img/Studente.png
+[logo]: img/logo.png
 [album]: img/Album.png
 [audizione]: img/Audizione.png
 [universitario]: img/Universitario.png
